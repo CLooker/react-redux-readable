@@ -1,0 +1,116 @@
+* {
+  font-family: 'sans-serif';
+}
+
+.nav {
+  display: flex;
+  list-style-type: none;
+}
+
+.nav li {
+  margin-right: 15px;
+}
+
+.nav img {
+  opacity: 0.5;
+}
+
+.nav .active img {
+  opacity: 1;
+}
+
+.sort-posts {
+  display: flex;
+  align-items: center;
+}
+
+div.post {
+  margin-right: 40px;
+}
+
+.details {
+  margin-left: 40px;
+}
+
+.sort-posts button {
+  width: 100px;
+  height: 50px;
+}
+
+.post {
+  margin-top: 20px;
+  border: 2px solid grey;
+  padding: 20px;
+}
+
+.comments-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment {
+  border: 2px solid grey;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+.post-buttons button {
+  text-align: center;
+  margin: 5px;
+  width: 85px;
+  height: 35px;
+}
+
+.comments-list-container {
+  margin-right: 40px;
+}
+
+.comments-title,
+.all-posts-title,
+.category-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: x-large;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.root-title-and-sort-container,
+.category-title-and-sort-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.comment-info {
+  margin: 10px;
+}
+
+.sort-comments {
+  margin-left: 40px;
+}
+
+.create {
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+input,
+textarea,
+select {
+  width: 500px;
+  margin: 10px;
+}
+
+.create input:last-child {
+  height: 50px;
+}
+
+.create button {
+  width: 100px;
+  margin: 10px;
+}
