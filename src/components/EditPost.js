@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import EditPostInfo from './EditPostInfo';
 import * as actions from '../actions';
 
 class EditPost extends Component {
@@ -66,11 +66,17 @@ class EditPost extends Component {
     })
       .then(res => res.json())
       .then(res => this.props.editPost(res) && res.id)
-      .then(id => this.props.history.push(`/posts/${id}`));
+      .then(id =>
+        this.props.history.push(
+          `/${this.props.match.params.category}/${this.props.match.params.id}`
+        )
+      );
   };
 
   handleCancel = () =>
-    this.props.history.push(`/posts/${this.props.match.params.id}`);
+    this.props.history.push(
+      `/${this.props.match.category}/${this.props.match.params.id}`
+    );
 
   render() {
     const {
@@ -85,56 +91,22 @@ class EditPost extends Component {
     } = this.state;
     return (
       !deleted && (
-        <div
-          className="post"
-          style={{ display: 'flex', flexDirection: 'column' }}
-        >
-          <label>
-            <strong>Title:</strong>
-            <input
-              type="text"
-              value={title}
-              onChange={this.handleTitleChange}
+        <div>
+          <div className="edit-post-title">Edit Post</div>
+          <div className="edit-post-container">
+            <EditPostInfo
+              title={title}
+              handleTitleChange={this.handleTitleChange}
+              body={body}
+              handleBodyChange={this.handleBodyChange}
+              voteScore={voteScore}
+              commentCount={commentCount}
+              category={category}
+              author={author}
+              timestamp={timestamp}
+              handleSubmit={this.handleSubmit}
+              handleCancel={this.handleCancel}
             />
-          </label>
-          <label>
-            <strong>Body:</strong>
-            <input type="text" value={body} onChange={this.handleBodyChange} />
-          </label>
-          <br />
-          <p>
-            <strong>Score: </strong>
-            {voteScore}
-          </p>
-          <p>
-            <strong>Comments: </strong>
-            {commentCount}
-          </p>
-          <p>
-            <strong>Category: </strong>
-            <Link
-              to={`/${category}/posts`}
-              style={{
-                textDecoration: 'underline',
-                textDecorationColor: 'blue',
-                color: 'blue'
-              }}
-            >
-              {category}
-            </Link>
-          </p>
-          <br />
-          <p>
-            <strong>By: </strong>
-            {author}
-          </p>
-          <p>
-            <strong>Date: </strong>
-            {new Date(timestamp).toLocaleString()}
-          </p>
-          <div className="post-buttons">
-            <button onClick={this.handleSubmit}>Submit</button>
-            <button onClick={this.handleCancel}>Cancel</button>
           </div>
         </div>
       )

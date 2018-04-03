@@ -4,6 +4,7 @@ import * as actions from '../actions';
 import Loading from './Loading';
 import Comments from './Comments';
 import PostDetailsPost from './PostDetailsPost';
+import NoMatch from './NoMatch';
 import voteScoresDiff from '../utils/voteScoresDiff.js';
 
 class PostDetails extends Component {
@@ -79,20 +80,23 @@ class PostDetails extends Component {
 	render() {
 		const { isFetching, deleted, comments } = this.state;
 		return (
-			<div>
+			<div className="post-details">
 				{isFetching ? (
 					<Loading />
 				) : (
 					<div>
-						{!deleted && (
+						{!deleted ? (
 							<div>
 								<PostDetailsPost {...this.state} {...this.props} />
 								<Comments
 									fetchComments={this.fetchComments}
 									comments={comments}
 									parentId={this.props.match.params.id}
+									category={this.props.match.params.category}
 								/>
 							</div>
+						) : (
+							<NoMatch location={this.props.location} />
 						)}
 					</div>
 				)}

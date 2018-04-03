@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import CreatePostForm from './CreatePostForm';
 import * as actions from '../actions';
 import returnUniqueValue from '../utils/returnUniqueValue.js';
 
-class AddPost extends Component {
+class CreatePost extends Component {
 	state = {
 		title: '',
 		body: '',
@@ -24,7 +25,8 @@ class AddPost extends Component {
 			.then(() => this.navigateToNewPost(this.state.id))
 			.catch(err => console.log(err));
 
-	navigateToNewPost = id => this.props.history.push(`/posts/${id}`);
+	navigateToNewPost = id =>
+		this.props.history.push(`/${this.state.category}/${id}`);
 
 	postIsValidated = ({ title, body, author, category }) =>
 		fetch('http://localhost:3001/posts/', {
@@ -88,32 +90,20 @@ class AddPost extends Component {
 
 	render() {
 		return (
-			<form className="post create" onSubmit={this.handleSubmit}>
-				<label>Title:</label>
-				<input
-					type="text"
-					value={this.state.title}
-					onChange={this.handleTitleChange}
+			<div className="create-post-container">
+				<div className="create-post-title">Create Post</div>
+				<CreatePostForm
+					handleSubmit={this.handleSubmit}
+					title={this.state.title}
+					handleTitleChange={this.handleTitleChange}
+					author={this.state.author}
+					handleAuthorChange={this.handleAuthorChange}
+					body={this.state.body}
+					handleBodyChange={this.handleBodyChange}
+					category={this.state.category}
+					handleCategoryChange={this.handleCategoryChange}
 				/>
-				<label>Author:</label>
-				<input
-					type="text"
-					value={this.state.author}
-					onChange={this.handleAuthorChange}
-				/>
-				<label>Post Body:</label>
-				<textarea value={this.state.body} onChange={this.handleBodyChange} />
-				<select
-					value={this.state.category}
-					onChange={this.handleCategoryChange}
-				>
-					<option disabled>Select Post Category...</option>
-					<option value="react">React</option>
-					<option value="redux">Redux</option>
-					<option value="udacity">Udacity</option>
-				</select>
-				<button>Submit</button>
-			</form>
+			</div>
 		);
 	}
 }
@@ -131,4 +121,4 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddPost);
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);

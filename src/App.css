@@ -2,13 +2,65 @@
   font-family: 'sans-serif';
 }
 
-.nav {
-  display: flex;
+ul {
+  padding: 0;
   list-style-type: none;
 }
 
+.root,
+.post-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.edit-post {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-post-container {
+  display: flex;
+  justify-content: center;
+}
+
+.create-comment-post {
+  min-width: 520px;
+}
+
+.category-posts,
+.create-post,
+.edit-comment,
+.create-comment {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.comments-container {
+  display: flex;
+  justify-content: center;
+}
+
+div.comments {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .nav li {
-  margin-right: 15px;
+  padding: 0 5px;
 }
 
 .nav img {
@@ -24,12 +76,34 @@
   align-items: center;
 }
 
-div.post {
-  margin-right: 40px;
+.no-match {
+  display: flex;
+  justify-content: center;
 }
 
-.details {
-  margin-left: 40px;
+.edit-comment-form,
+.edit-comment-form-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+div.post-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.comments-list {
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .sort-posts button {
@@ -38,7 +112,12 @@ div.post {
 }
 
 .post {
-  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 2px solid grey;
+  padding: 20px;
+}
+
+.create-comment-post {
   border: 2px solid grey;
   padding: 20px;
 }
@@ -61,13 +140,19 @@ div.post {
   height: 35px;
 }
 
-.comments-list-container {
-  margin-right: 40px;
+.comments-title {
+  font-weight: bold;
+  font-size: x-large;
+  margin-top: 40px;
 }
 
-.comments-title,
 .all-posts-title,
-.category-title {
+.category-title,
+.edit-comment-title,
+.edit-post-title,
+.create-comment-title,
+.create-post-title,
+.post-details-post-title {
   text-align: center;
   font-weight: bold;
   font-size: x-large;
@@ -84,19 +169,19 @@ div.post {
 }
 
 .comment-info {
-  margin: 10px;
+  margin: 0 10px 10px 10px;
 }
 
-.sort-comments {
-  margin-left: 40px;
-}
-
-.create {
-  margin-left: 40px;
+.create-comment {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.create-comment-form {
+  display: flex;
+  flex-direction: column;
 }
 
 input,
@@ -106,11 +191,54 @@ select {
   margin: 10px;
 }
 
-.create input:last-child {
+.edit-comment-post-text {
+  font-weight: bold;
+  margin-right: 5px;
+}
+
+.edit-comment-post-container {
+  display: flex;
+  align-items: center;
+}
+
+.category-link,
+.post-link {
+  text-decoration: underline;
+  text-decoration-color: blue;
+  font-weight: bold;
+  color: blue;
+}
+
+.category-link {
+  font-weight: normal;
+}
+
+.create-comment input:last-child {
   height: 50px;
 }
 
-.create button {
+.create-comment-author,
+.create-comment-body {
+  text-align: center;
+}
+
+.create-comment button {
   width: 100px;
   margin: 10px;
+}
+
+.edit-comment-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid grey;
+  padding: 20px;
+}
+
+.edit-comment-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 520px;
+  padding: 0;
 }

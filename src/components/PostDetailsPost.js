@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../actions';
+import PostDetailsButtons from './PostDetailsButtons';
 import serverUpvotePost from '../utils/serverUpvotePost.js';
 import serverDownvotePost from '../utils/serverDownvotePost.js';
 import serverDeletePost from '../utils/serverDeletePost.js';
@@ -35,51 +36,44 @@ class PostDetailsPost extends Component {
       timestamp
     } = this.props;
     return (
-      <div className="post details">
-        <p style={{ fontWeight: 'bold' }}>{title}</p>
-        <p>{body}</p>
-        <br />
-        <p>
-          <strong>Score: </strong>
-          {voteScore}
-        </p>
-        <p>
-          <strong>Comments: </strong>
-          {commentCount}
-        </p>
-        <p>
-          <strong>Category: </strong>
-          <Link
-            to={`/${category}/posts`}
-            style={{
-              textDecoration: 'underline',
-              textDecorationColor: 'blue',
-              color: 'blue'
-            }}
-          >
-            {category}
-          </Link>
-        </p>
-        <br />
-        <p>
-          <strong>By: </strong>
-          {author}
-        </p>
-        <p>
-          <strong>Date: </strong>
-          {new Date(timestamp).toLocaleString()}
-        </p>
-
-        <div className="post-buttons">
-          <Link to={`/posts/edit/${id}`}>
-            <button>Edit</button>
-          </Link>
-          <button onClick={() => this.serverDeletePost(id)}>Delete</button>
-          <button onClick={() => this.serverUpvotePost(id)}>Upvote</button>
-          <button onClick={() => this.serverDownvotePost(id)}>Downvote</button>
-          <Link to={`/posts/${id}/comments/create`}>
-            <button>Comment</button>
-          </Link>
+      <div>
+        <div className="post-details-post-title">Post Details</div>
+        <div className="post details">
+          <p>
+            <strong>{title}</strong>
+          </p>
+          <p>{body}</p>
+          <br />
+          <p>
+            <strong>Score: </strong>
+            {voteScore}
+          </p>
+          <p>
+            <strong>Comments: </strong>
+            {commentCount}
+          </p>
+          <p>
+            <strong>Category: </strong>
+            <Link to={`/${category}`} className="category-link">
+              {category}
+            </Link>
+          </p>
+          <br />
+          <p>
+            <strong>By: </strong>
+            {author}
+          </p>
+          <p>
+            <strong>Date: </strong>
+            {new Date(timestamp).toLocaleString()}
+          </p>
+          <PostDetailsButtons
+            category={category}
+            id={id}
+            serverDeletePost={this.serverDeletePost}
+            serverUpvotePost={this.serverUpvotePost}
+            serverDownvotePost={this.serverDownvotePost}
+          />
         </div>
       </div>
     );

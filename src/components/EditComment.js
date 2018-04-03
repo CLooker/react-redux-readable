@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import EditCommentPost from './EditCommentPost';
+import EditCommentForm from './EditCommentForm';
 import * as actions from '../actions';
 
 class EditComment extends Component {
   state = {
     parentTitle: '',
     parentCategory: '',
+    parentBody: '',
     body: '',
     deleted: ''
   };
@@ -29,13 +31,17 @@ class EditComment extends Component {
         })
       }
     ).then(() =>
-      this.props.history.push(`/posts/${this.props.match.params.id}`)
+      this.props.history.push(
+        `/${this.state.parentCategory}/${this.props.match.params.id}`
+      )
     );
   };
 
   handleCancel = e => {
     e.preventDefault();
-    this.props.history.push(`/posts/${this.props.match.params.id}`);
+    this.props.history.push(
+      `/${this.state.parentCategory}/${this.props.match.params.id}`
+    );
   };
 
   componentDidMount() {
@@ -66,6 +72,7 @@ class EditComment extends Component {
           .then(res =>
             this.setState({
               parentTitle: res.title,
+              parentBody: res.body,
               parentCategory: res.category
             })
           );
@@ -73,63 +80,33 @@ class EditComment extends Component {
   }
 
   render() {
-    const { parentTitle, parentCategory, body, deleted } = this.state;
+    const {
+      parentTitle,
+      parentCategory,
+      parentBody,
+      body,
+      deleted
+    } = this.state;
     return (
       !deleted && (
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'center',
-            alignItems: 'center',
-            border: '1px solid darkgrey'
-          }}
-        >
-          <h4>Edit Comment</h4>
-          <p>Post Title:</p>
-          <Link
-            to={`/posts/${this.props.match.params.id}`}
-            style={{
-              textDecoration: 'underline',
-              textDecorationColor: 'blue',
-              color: 'blue'
-            }}
-          >
-            {parentTitle}
-          </Link>
-          <p>Post Category: </p>
-          <Link
-            to={`/${parentCategory}/posts`}
-            style={{
-              textDecoration: 'underline',
-              textDecorationColor: 'blue',
-              color: 'blue'
-            }}
-          >
-            {parentCategory}
-          </Link>
-          <form style={{ display: 'flex', flexDirection: 'column' }}>
-            <label>
-              Body:
-              <input
-                type="text"
-                value={body}
-                onChange={this.handleBodyChange}
+        <div className="edit-comment-container">
+          <div className="edit-comment-title">Edit Comment</div>
+          <div className="edit-comment-form-container">
+            <div className="edit-comment">
+              <EditCommentPost
+                category={parentCategory}
+                id={this.props.match.params.id}
+                title={parentTitle}
+                body={parentBody}
               />
-            </label>
-            <br />
-            <div
-              className="post-buttons"
-              style={{
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center'
-              }}
-            >
-              <button onClick={this.handleSubmit}>Submit</button>
-              <button onClick={this.handleCancel}>Cancel</button>
+              <EditCommentForm
+                body={body}
+                handleBodyChange={this.handleBodyChange}
+                handleSubmit={this.handleSubmit}
+                handleCancel={this.handleCancel}
+              />
             </div>
-          </form>
+          </div>
         </div>
       )
     );

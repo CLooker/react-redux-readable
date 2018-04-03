@@ -1,4 +1,5 @@
 import React from 'react';
+import PostButtons from './PostButtons';
 import { Link } from 'react-router-dom';
 
 const Post = props => {
@@ -15,17 +16,9 @@ const Post = props => {
   } = props.post;
   return (
     <div className="post">
-      <li style={{ listStyleType: 'none' }}>
+      <li>
         <p>
-          <Link
-            to={`/posts/${id}`}
-            style={{
-              textDecoration: 'underline',
-              textDecorationColor: 'blue',
-              color: 'blue',
-              fontWeight: 'bold'
-            }}
-          >
+          <Link to={`/${category}/${id}`} className="post-link">
             {title}
           </Link>
         </p>
@@ -41,14 +34,7 @@ const Post = props => {
         </p>
         <p>
           <strong>Category: </strong>
-          <Link
-            to={`/${category}/posts`}
-            style={{
-              textDecoration: 'underline',
-              textDecorationColor: 'blue',
-              color: 'blue'
-            }}
-          >
+          <Link to={`/${category}`} className="category-link">
             {category}
           </Link>
         </p>
@@ -62,17 +48,13 @@ const Post = props => {
           <strong>Date: </strong>
           {new Date(timestamp).toLocaleString()}
         </p>
-        <div className="post-buttons">
-          <Link to={`/posts/edit/${id}`}>
-            <button>Edit</button>
-          </Link>
-          <button onClick={() => serverDeletePost(id)}>Delete</button>
-          <button onClick={() => serverUpvotePost(id)}>Upvote</button>
-          <button onClick={() => serverDownvotePost(id)}>Downvote</button>
-          <Link to={`/posts/${id}/comments/create`}>
-            <button>Comment</button>
-          </Link>
-        </div>
+        <PostButtons
+          category={category}
+          id={id}
+          serverDeletePost={serverDeletePost}
+          serverUpvotePost={serverUpvotePost}
+          serverDownvotePost={serverDownvotePost}
+        />
       </li>
     </div>
   );

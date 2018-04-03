@@ -39,7 +39,7 @@ class Nav extends Component {
 					].concat(
 						this.props.categories.map(cat => (
 							<li key={cat}>
-								<NavLink activeClassName="active" to={`/${cat}/posts`}>
+								<NavLink exact activeClassName="active" to={`/${cat}`}>
 									<img
 										src={require(`../assets/${cat}_logo.png`)}
 										alt={`${cat} posts`}
@@ -50,7 +50,7 @@ class Nav extends Component {
 						))
 					)}
 					<li key="add-post">
-						<NavLink exact activeClassName="active" to={'/create/posts'}>
+						<NavLink exact activeClassName="active" to={'/create-post'}>
 							<img
 								src={require('../assets/new_logo.png')}
 								alt="create post"

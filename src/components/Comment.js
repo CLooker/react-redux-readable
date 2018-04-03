@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import CommentInfo from './CommentInfo';
+import CommentButtons from './CommentButtons';
 import * as actions from '../actions';
 
 class Comment extends Component {
@@ -47,46 +48,24 @@ class Comment extends Component {
       .catch(err => console.log(err));
 
   render() {
-    const { comment, parentId } = this.props;
+    const { comment, category } = this.props;
     return (
-      <li
-        key={comment.id}
-        style={{ listStyleType: 'none' }}
-        className="comment"
-      >
-        <div className="comment-info">
-          <p>
-            <strong>{comment.body}</strong>
-          </p>
-          <br />
-          <p>
-            <strong>Score: </strong>
-            {comment.voteScore}
-          </p>
-          <p>
-            <strong>By: </strong>
-            {comment.author}
-          </p>
-          <p>
-            <strong>Date: </strong>
-            {new Date(comment.timestamp).toLocaleString()}
-          </p>
-        </div>
+      <li className="comment">
+        <CommentInfo
+          body={comment.body}
+          voteScore={comment.voteScore}
+          author={comment.author}
+          timestamp={comment.timestamp}
+        />
         <br />
-        <div className="post-buttons">
-          <Link to={`/posts/${parentId}/comments/${comment.id}/edit`}>
-            <button>Edit</button>
-          </Link>
-          <button onClick={() => this.serverCommentDelete(comment.id)}>
-            Delete
-          </button>
-          <button onClick={() => this.serverCommentUpvote(comment.id)}>
-            Upvote
-          </button>
-          <button onClick={() => this.serverCommentDownvote(comment.id)}>
-            Downvote
-          </button>
-        </div>
+        <CommentButtons
+          category={category}
+          parentId={comment.parentId}
+          id={comment.id}
+          serverCommentDelete={this.serverCommentDelete}
+          serverCommentUpvote={this.serverCommentUpvote}
+          serverCommentDownvote={this.serverCommentDownvote}
+        />
       </li>
     );
   }

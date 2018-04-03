@@ -27,14 +27,12 @@ class Comments extends Component {
   }
 
   render() {
-    const { parentId } = this.props;
     const { commentsToRender } = this.state;
-    console.log('comments state: ', this.state);
-    console.log('comments props: ', this.props);
+    const { category } = this.props;
     return (
-      <div>
+      <div className="comments-container">
         {commentsToRender.length > 0 && (
-          <div>
+          <div className="comments">
             <div className="comments-title">Comments</div>
             <div className="comments-list-container">
               <ul className="comments-list">
@@ -42,7 +40,7 @@ class Comments extends Component {
                   <Comment
                     key={comment.id}
                     comment={comment}
-                    parentId={parentId}
+                    category={category}
                   />
                 ))}
               </ul>

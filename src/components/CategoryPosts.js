@@ -74,7 +74,7 @@ class CategoryPosts extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="category-posts">
 				<div className="category-title-and-sort-container">
 					{this.state.postsToRender.length > 0 && (
 						<h1 className="category-title">

@@ -11,8 +11,6 @@ import serverUpvotePost from '../utils/serverUpvotePost.js';
 import serverDownvotePost from '../utils/serverDownvotePost.js';
 import serverDeletePost from '../utils/serverDeletePost.js';
 
-// new posts shouldn't have old posts comments render
-
 class Root extends Component {
 	state = {
 		postsToRender: [],
@@ -63,11 +61,11 @@ class Root extends Component {
 
 	render() {
 		return (
-			<div>
+			<div className="root">
 				{this.state.postsToRender.length > 0 && (
 					<div>
 						<div className="root-title-and-sort-container">
-							<div className="all-posts-title">All Posts</div>
+							<div className="all-posts-title">All</div>
 							{this.state.postsToRender.length > 1 && (
 								<div className="sort-posts">
 									<SortPosts
