@@ -15,68 +15,68 @@ export const DOWNVOTE_COMMENT = 'DOWNVOTE_COMMENT';
 export const DELETE_COMMENT = 'DELETE_COMMENT';
 
 export const addComment = comment => ({
-	type: ADD_COMMENT,
-	comment
+  type: ADD_COMMENT,
+  comment
 });
 
 export const addPost = post => ({
-	type: ADD_POST,
-	post
+  type: ADD_POST,
+  post
 });
 
 export const syncAllPosts = posts => ({
-	type: SYNC_ALL_POSTS,
-	posts
+  type: SYNC_ALL_POSTS,
+  posts
 });
 
 export const syncLocalPosts = posts => ({
-	type: SYNC_LOCAL_POSTS,
-	posts
+  type: SYNC_LOCAL_POSTS,
+  posts
 });
 
 export const syncLocalPost = post => ({
-	type: SYNC_LOCAL_POST,
-	post
+  type: SYNC_LOCAL_POST,
+  post
 });
 
 export const upvotePost = post => ({
-	type: UPVOTE_POST,
-	post
+  type: UPVOTE_POST,
+  post
 });
 
 export const downvotePost = post => ({
-	type: DOWNVOTE_POST,
-	post
+  type: DOWNVOTE_POST,
+  post
 });
 
 export const deletePost = post => ({
-	type: DELETE_POST,
-	post
+  type: DELETE_POST,
+  post
 });
 
 export const upvoteComment = commentId => ({
-	type: UPVOTE_COMMENT,
-	commentId
+  type: UPVOTE_COMMENT,
+  commentId
 });
 
 export const downvoteComment = commentId => ({
-	type: DOWNVOTE_COMMENT,
-	commentId
+  type: DOWNVOTE_COMMENT,
+  commentId
 });
 
 export const deleteComment = commentId => ({
-	type: DELETE_COMMENT,
-	commentId
+  type: DELETE_COMMENT,
+  commentId
 });
 
 export const editComment = comment => ({
-	type: EDIT_COMMENT,
-	comment
+  type: EDIT_COMMENT,
+  comment
 });
 
 export const editPost = post => ({
-	type: EDIT_POST,
-	post
+  type: EDIT_POST,
+  post
 });
 
 
