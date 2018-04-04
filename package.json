@@ -1,6 +1,7 @@
 {
   "name": "readable",
   "version": "0.1.0",
+  "homepage": "https://clooker.github.io/react-redux-readable",
   "private": true,
   "dependencies": {
     "react": "^16.2.0",
@@ -15,6 +16,10 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "yarn run build&&gh-pages -d build"
+  },
+  "devDependencies": {
+    "gh-pages": "^1.1.0"
   }
 }
