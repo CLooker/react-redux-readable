@@ -27,7 +27,7 @@ class Nav extends Component {
               <NavLink
                 exact
                 activeClassName="active"
-                to="/react-redux-readable"
+                to="https://clooker.github.io/react-redux-readable/"
               >
                 <img
                   src={require('../assets/home_logo.jpg')}
