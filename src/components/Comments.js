@@ -1,26 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Comment from './Comment';
+import returnCommentsToRender from '../utils/returnCommentsToRender.js';
 
 class Comments extends Component {
-  state = {
-    parentId: null,
-    commentsToRender: []
-  };
-
-  componentDidMount() {
-    this.setState({
-      commentsToRender: this.filterDeletedComments(this.props.comments),
-      parentId: this.props.parentId
-    });
+  // use constructor to initialize state
+  // was setting state in componentDidMount, but that caused an extra render
+  constructor(props) {
+    super(props);
+    this.state = {
+      commentsToRender: this.filterDeletedComments(props.comments),
+      parentId: props.parentId
+    };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    return {
-      commentsToRender: nextProps.comments.filter(
-        c => c.parentId === prevState.parentId && c.deleted === false
-      )
-    };
+    return returnCommentsToRender(nextProps, prevState);
   }
 
   filterDeletedComments = comments =>

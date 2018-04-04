@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EditPostInfo from './EditPostInfo';
+import fetchLocalPost from '../utils/fetchLocalPost.js';
+import serverPostEdit from '../utils/serverPostEdit.js';
 import { syncLocalPost, editPost } from '../actions';
 
 class EditPost extends Component {
@@ -16,16 +18,10 @@ class EditPost extends Component {
   };
 
   componentDidMount() {
-    fetch(`http://localhost:3001/posts/${this.props.match.params.id}`, {
-      method: 'GET',
-      headers: {
-        Authorization: 'react-redux-app'
-      }
-    })
-      .then(res => res.json())
+    fetchLocalPost(this.props.match.params.id)
       .then(res => this.props.syncLocalPost(res) && res)
-      .then(res => {
-        const {
+      .then(
+        ({
           title,
           body,
           voteScore,
@@ -34,18 +30,18 @@ class EditPost extends Component {
           author,
           timestamp,
           deleted
-        } = res;
-        this.setState({
-          title,
-          body,
-          voteScore,
-          commentCount,
-          category,
-          author,
-          timestamp,
-          deleted
-        });
-      });
+        }) =>
+          this.setState({
+            title,
+            body,
+            voteScore,
+            commentCount,
+            category,
+            author,
+            timestamp,
+            deleted
+          })
+      );
   }
 
   handleTitleChange = e => this.setState({ title: e.target.value });
@@ -53,18 +49,11 @@ class EditPost extends Component {
   handleBodyChange = e => this.setState({ body: e.target.value });
 
   handleSubmit = () => {
-    fetch(`http://localhost:3001/posts/${this.props.match.params.id}`, {
-      method: 'PUT',
-      headers: {
-        Authorization: 'react-redux-app',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        title: this.state.title,
-        body: this.state.body
-      })
+    serverPostEdit({
+      id: this.props.match.params.id,
+      title: this.state.title,
+      body: this.state.body
     })
-      .then(res => res.json())
       .then(res => this.props.editPost(res) && res.id)
       .then(id =>
         this.props.history.push(
@@ -122,4 +111,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(null, mapDispatchToProps)(EditPost);
-

@@ -10,6 +10,8 @@ import CreateComment from './CreateComment';
 import EditComment from './EditComment';
 import '../App.css';
 
+// validate all forms
+
 export default class App extends Component {
 	render() {
 		return (
@@ -17,7 +19,6 @@ export default class App extends Component {
 				<div>
 					<Route path="" component={Nav} />
 					<Route exact path="/" component={Root} />
-					<Route exact path="/create-post" component={CreatePost} />
 					<Route exact path="/:category" component={CategoryPosts} />
 					<Route exact path="/:category/:id" component={PostDetails} />
 					<Route exact path="/:category/:id/edit" component={EditPost} />
@@ -31,6 +32,7 @@ export default class App extends Component {
 						path="/:category/:id/edit-comment/:commentId"
 						component={EditComment}
 					/>
+					<Route exact path="/create-post" component={CreatePost} />
 				</div>
 			</Router>
 		);

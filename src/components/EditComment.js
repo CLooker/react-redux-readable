@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import fetchComment from '../utils/fetchComment.js';
+import fetchLocalPost from '../utils/fetchLocalPost.js';
+import serverEditComment from '../utils/serverEditComment.js';
 import EditCommentPost from './EditCommentPost';
 import EditCommentForm from './EditCommentForm';
 import { editComment } from '../actions';
@@ -14,16 +17,7 @@ class EditComment extends Component {
   };
 
   componentDidMount() {
-    fetch(
-      `http://localhost:3001/comments/${this.props.match.params.commentId}`,
-      {
-        method: 'GET',
-        headers: {
-          Authorization: 'react-redux-app'
-        }
-      }
-    )
-      .then(res => res.json())
+    fetchComment(this.props.match.params.commentId)
       .then(res =>
         this.setState({
           body: res.body,
@@ -31,20 +25,13 @@ class EditComment extends Component {
         })
       )
       .then(() => {
-        fetch(`http://localhost:3001/posts/${this.props.match.params.id}`, {
-          method: 'GET',
-          headers: {
-            Authorization: 'react-redux-app'
-          }
-        })
-          .then(res => res.json())
-          .then(res =>
-            this.setState({
-              parentTitle: res.title,
-              parentBody: res.body,
-              parentCategory: res.category
-            })
-          );
+        fetchLocalPost(this.props.match.params.id).then(res =>
+          this.setState({
+            parentTitle: res.title,
+            parentBody: res.body,
+            parentCategory: res.category
+          })
+        );
       });
   }
 
@@ -52,30 +39,27 @@ class EditComment extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    fetch(
-      `http://localhost:3001/comments/${this.props.match.params.commentId}`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: 'react-redux-app',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          timestamp: Date.now(),
-          body: this.state.body
-        })
-      }
-    ).then(() =>
-      this.props.history.push(
-        `/${this.state.parentCategory}/${this.props.match.params.id}`
-      )
-    );
+    serverEditComment({
+      id: this.props.match.params.commentId,
+      body: this.state.body
+    })
+      .then(res => this.props.editComment(res))
+      .then(() =>
+        this.navigateToParentPost(
+          this.state.parentCategory,
+          this.props.match.params.id
+        )
+      );
   };
+
+  navigateToParentPost = (category, id) =>
+    this.props.history.push(`/${category}/${id}`);
 
   handleCancel = e => {
     e.preventDefault();
-    this.props.history.push(
-      `/${this.state.parentCategory}/${this.props.match.params.id}`
+    this.navigateToParentPost(
+      this.state.parentCategory,
+      this.props.match.params.id
     );
   };
 

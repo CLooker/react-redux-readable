@@ -6,6 +6,8 @@ import Comments from './Comments';
 import PostDetailsPost from './PostDetailsPost';
 import NoMatch from './NoMatch';
 import voteScoresDiff from '../utils/voteScoresDiff.js';
+import fetchComments from '../utils/fetchComments.js';
+import fetchLocalPost from '../utils/fetchLocalPost.js';
 
 class PostDetails extends Component {
 	state = {
@@ -30,48 +32,46 @@ class PostDetails extends Component {
 		return voteScoresDiff(nextProps, prevState, 'singlePost');
 	}
 
-	fetchComments = post => {
-		fetch(`http://localhost:3001/posts/${post}/comments`, {
-			method: 'GET',
-			headers: {
-				Authorization: 'react-redux-app'
-			}
-		})
-			.then(res => res.json())
+	fetchComments = post =>
+		fetchComments(post)
 			.then(
 				res => res.forEach(comment => this.props.addComment(comment)) || res
 			)
 			.then(res => this.setState({ comments: [...res], isFetching: false }))
 
 			.catch(err => err);
-	};
 
 	fetchPost = post => {
-		fetch(`http://localhost:3001/posts/${post}`, {
-			method: 'GET',
-			headers: {
-				Authorization: 'react-redux-app'
-			}
-		})
-			.then(res => res.json())
+		fetchLocalPost(post)
 			.then(
 				res =>
 					Object.keys(res).length > 0
 						? this.props.syncLocalPost(res) && res
 						: { deleted: true }
 			)
-			.then(res =>
-				this.setState({
-					id: res.id,
-					title: res.title,
-					body: res.body,
-					author: res.author,
-					voteScore: res.voteScore,
-					category: res.category,
-					timestamp: res.timestamp,
-					deleted: res.deleted,
-					commentCount: res.commentCount
-				})
+			.then(
+				({
+					id,
+					title,
+					body,
+					author,
+					voteScore,
+					category,
+					timestamp,
+					deleted,
+					commentCount
+				}) =>
+					this.setState({
+						id,
+						title,
+						body,
+						author,
+						voteScore,
+						category,
+						timestamp,
+						deleted,
+						commentCount
+					})
 			)
 			.then(this.fetchComments(post))
 			.catch(err => console.log(err));
@@ -119,4 +119,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);
-

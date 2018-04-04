@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import CreateCommentPost from './CreateCommentPost';
 import CreateCommentForm from './CreateCommentForm';
 import { addComment } from '../actions';
-import returnUniqueValue from '../utils/returnUniqueValue.js';
+import fetchLocalPost from '../utils/fetchLocalPost.js';
+import serverCreateComment from '../utils/serverCreateComment.js';
 
 class CreateComment extends Component {
   state = {
@@ -18,21 +19,15 @@ class CreateComment extends Component {
   };
 
   componentDidMount() {
-    fetch(`http://localhost:3001/posts/${this.props.match.params.id}`, {
-      method: 'GET',
-      headers: {
-        Authorization: 'react-redux-app'
-      }
-    })
-      .then(res => res.json())
-      .then(res =>
+    fetchLocalPost(this.props.match.params.id)
+      .then(({ title, body, author, voteScore, timestamp, commentCount }) =>
         this.setState({
-          parentTitle: res.title,
-          parentBody: res.body,
-          parentAuthor: res.author,
-          parentVoteScore: res.voteScore,
-          parentTimestamp: res.timestamp,
-          parentCommentCount: res.commentCount
+          parentTitle: title,
+          parentBody: body,
+          parentAuthor: author,
+          parentVoteScore: voteScore,
+          parentTimestamp: timestamp,
+          parentCommentCount: commentCount
         })
       )
       .catch(err => console.log(err));
@@ -44,25 +39,20 @@ class CreateComment extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    fetch(`http://localhost:3001/comments`, {
-      method: 'POST',
-      headers: {
-        Authorization: 'react-redux-app',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        id: returnUniqueValue(),
-        timestamp: Date.now(),
-        body: this.state.body,
-        author: this.state.author,
-        parentId: this.props.match.params.id
-      })
+    serverCreateComment({
+      body: this.state.body,
+      author: this.state.author,
+      parentId: this.props.match.params.id
     }).then(() =>
-      this.props.history.push(
-        `/${this.props.match.params.category}/${this.props.match.params.id}`
+      this.navigateToNewPost(
+        this.props.match.params.category,
+        this.props.match.params.id
       )
     );
   };
+
+  navigateToNewPost = (category, id) =>
+    this.props.history.push(`/${category}/${id}`);
 
   render() {
     const {

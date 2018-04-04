@@ -13,7 +13,7 @@ const EditCommentPost = ({ category, id, title, body }) => (
       <p className="edit-comment-post-text">
         <strong>Post Category:</strong>{' '}
       </p>
-      <Link to={`/${category}`} class="category-link">
+      <Link to={`/${category}`} className="category-link">
         {category}
       </Link>
     </div>

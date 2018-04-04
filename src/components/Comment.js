@@ -3,47 +3,23 @@ import { connect } from 'react-redux';
 import CommentInfo from './CommentInfo';
 import CommentButtons from './CommentButtons';
 import { upvoteComment, downvoteComment, deleteComment } from '../actions';
+import serverCommentUpvote from '../utils/serverCommentUpvote.js';
+import serverCommentDownvote from '../utils/serverCommentUpvote.js';
+import serverCommentDelete from '../utils/serverCommentDelete.js';
 
 class Comment extends Component {
   serverCommentUpvote = id =>
-    fetch(`http://localhost:3001/comments/${id}`, {
-      method: 'POST',
-      headers: {
-        Authorization: 'react-redux-app',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        option: 'upVote'
-      })
-    })
-      .then(res => res.json())
+    serverCommentUpvote(id)
       .then(res => this.props.upvoteComment(id))
       .catch(err => console.log(err));
 
   serverCommentDownvote = id =>
-    fetch(`http://localhost:3001/comments/${id}`, {
-      method: 'POST',
-      headers: {
-        Authorization: 'react-redux-app',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        option: 'downVote'
-      })
-    })
-      .then(res => res.json())
+    serverCommentDownvote(id)
       .then(res => this.props.downvoteComment(id))
       .catch(err => console.log(err));
 
   serverCommentDelete = id =>
-    fetch(`http://localhost:3001/comments/${id}`, {
-      method: 'DELETE',
-      headers: {
-        Authorization: 'react-redux-app',
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => res.json())
+    serverCommentDelete(id)
       .then(res => this.props.deleteComment(res.id))
       .catch(err => console.log(err));
 
@@ -83,4 +59,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(null, mapDispatchToProps)(Comment);
-

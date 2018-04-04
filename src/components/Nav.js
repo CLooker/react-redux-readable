@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import fetchCategories from '../utils/fetchCategories.js';
 
 class Nav extends Component {
 	componentDidMount() {
@@ -8,14 +9,9 @@ class Nav extends Component {
 	}
 
 	fetchCategories() {
-		fetch('http://localhost:3001/categories/', {
-			method: 'GET',
-			headers: {
-				Authorization: 'react-redux-app'
-			}
-		})
-			.then(res => res.json())
-			.then(res => this.syncCategories(res));
+		fetchCategories()
+			.then(res => this.syncCategories(res))
+			.catch(err => console.log(err));
 	}
 
 	syncCategories(res) {

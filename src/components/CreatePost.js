@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CreatePostForm from './CreatePostForm';
 import { syncAllPosts, addPost } from '../actions';
-import returnUniqueValue from '../utils/returnUniqueValue.js';
+import fetchAllPosts from '../utils/fetchAllPosts.js';
+import serverCreatePost from '../utils/serverCreatePost.js';
 
 class CreatePost extends Component {
 	state = {
@@ -14,13 +15,7 @@ class CreatePost extends Component {
 	};
 
 	syncAllPosts = () =>
-		fetch('http://localhost:3001/posts/', {
-			method: 'GET',
-			headers: {
-				Authorization: 'react-redux-app'
-			}
-		})
-			.then(res => res.json())
+		fetchAllPosts()
 			.then(res => this.props.syncAllPosts(res))
 			.then(() => this.navigateToNewPost(this.state.id))
 			.catch(err => console.log(err));
@@ -29,22 +24,7 @@ class CreatePost extends Component {
 		this.props.history.push(`/${this.state.category}/${id}`);
 
 	postIsValidated = ({ title, body, author, category }) =>
-		fetch('http://localhost:3001/posts/', {
-			method: 'POST',
-			headers: {
-				Authorization: 'react-redux-app',
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				id: returnUniqueValue(),
-				timestamp: Date.now(),
-				title,
-				body,
-				author,
-				category
-			})
-		})
-			.then(res => res.json())
+		serverCreatePost({ title, body, author, category })
 			.then(({ id }) => this.setState({ id }))
 			.then(() => {
 				this.syncAllPosts();
@@ -122,5 +102,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);
-
-
