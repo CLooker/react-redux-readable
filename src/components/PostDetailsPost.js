@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import { upvotePost, downvotePost, deletePost } from '../actions';
 import PostDetailsButtons from './PostDetailsButtons';
 import serverUpvotePost from '../utils/serverUpvotePost.js';
 import serverDownvotePost from '../utils/serverDownvotePost.js';
@@ -82,10 +82,12 @@ class PostDetailsPost extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    upvotePost: post => dispatch(actions.upvotePost(post)),
-    downvotePost: post => dispatch(actions.downvotePost(post)),
-    deletePost: post => dispatch(actions.deletePost(post))
+    upvotePost: post => dispatch(upvotePost(post)),
+    downvotePost: post => dispatch(downvotePost(post)),
+    deletePost: post => dispatch(deletePost(post))
   };
 }
 
 export default connect(null, mapDispatchToProps)(PostDetailsPost);
+
+

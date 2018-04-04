@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EditCommentPost from './EditCommentPost';
 import EditCommentForm from './EditCommentForm';
-import * as actions from '../actions';
+import { editComment } from '../actions';
 
 class EditComment extends Component {
   state = {
@@ -11,37 +11,6 @@ class EditComment extends Component {
     parentBody: '',
     body: '',
     deleted: ''
-  };
-
-  handleBodyChange = e => this.setState({ body: e.target.value });
-
-  handleSubmit = e => {
-    e.preventDefault();
-    fetch(
-      `http://localhost:3001/comments/${this.props.match.params.commentId}`,
-      {
-        method: 'PUT',
-        headers: {
-          Authorization: 'react-redux-app',
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          timestamp: Date.now(),
-          body: this.state.body
-        })
-      }
-    ).then(() =>
-      this.props.history.push(
-        `/${this.state.parentCategory}/${this.props.match.params.id}`
-      )
-    );
-  };
-
-  handleCancel = e => {
-    e.preventDefault();
-    this.props.history.push(
-      `/${this.state.parentCategory}/${this.props.match.params.id}`
-    );
   };
 
   componentDidMount() {
@@ -79,6 +48,37 @@ class EditComment extends Component {
       });
   }
 
+  handleBodyChange = e => this.setState({ body: e.target.value });
+
+  handleSubmit = e => {
+    e.preventDefault();
+    fetch(
+      `http://localhost:3001/comments/${this.props.match.params.commentId}`,
+      {
+        method: 'PUT',
+        headers: {
+          Authorization: 'react-redux-app',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          timestamp: Date.now(),
+          body: this.state.body
+        })
+      }
+    ).then(() =>
+      this.props.history.push(
+        `/${this.state.parentCategory}/${this.props.match.params.id}`
+      )
+    );
+  };
+
+  handleCancel = e => {
+    e.preventDefault();
+    this.props.history.push(
+      `/${this.state.parentCategory}/${this.props.match.params.id}`
+    );
+  };
+
   render() {
     const {
       parentTitle,
@@ -115,7 +115,7 @@ class EditComment extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    editComment: comment => dispatch(actions.editComment(comment))
+    editComment: comment => dispatch(editComment(comment))
   };
 }
 

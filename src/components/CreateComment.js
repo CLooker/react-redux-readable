@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CreateCommentPost from './CreateCommentPost';
 import CreateCommentForm from './CreateCommentForm';
-import * as actions from '../actions';
+import { addComment } from '../actions';
 import returnUniqueValue from '../utils/returnUniqueValue.js';
 
 class CreateComment extends Component {
@@ -102,7 +102,7 @@ class CreateComment extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    addComment: comment => dispatch(actions.addComment(comment))
+    addComment: comment => dispatch(addComment(comment))
   };
 }
 

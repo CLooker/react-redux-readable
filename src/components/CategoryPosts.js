@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import {
+	syncAllPosts,
+	syncLocalPosts,
+	upvotePost,
+	downvotePost,
+	deletePost
+} from '../actions';
 import SortPosts from './SortPosts';
 import PostsList from './PostsList';
 import voteScoresDiff from '../utils/voteScoresDiff.js';
@@ -21,14 +27,14 @@ class CategoryPosts extends Component {
 		this.fetchLocalPosts(this.props.match.params.category);
 	}
 
-	static getDerivedStateFromProps(nextProps, prevState) {
-		return voteScoresDiff(nextProps, prevState, null, prevState.order);
-	}
-
 	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.match.params.category !== this.props.match.params.category) {
 			this.fetchLocalPosts(this.props.match.params.category);
 		}
+	}
+
+	static getDerivedStateFromProps(nextProps, prevState) {
+		return voteScoresDiff(nextProps, prevState, null, prevState.order);
 	}
 
 	fetchLocalPosts = category =>
@@ -114,11 +120,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		syncAllPosts: posts => dispatch(actions.syncAllPosts(posts)),
-		syncLocalPosts: posts => dispatch(actions.syncLocalPosts(posts)),
-		upvotePost: post => dispatch(actions.upvotePost(post)),
-		downvotePost: post => dispatch(actions.downvotePost(post)),
-		deletePost: post => dispatch(actions.deletePost(post))
+		syncAllPosts: posts => dispatch(syncAllPosts(posts)),
+		syncLocalPosts: posts => dispatch(syncLocalPosts(posts)),
+		upvotePost: post => dispatch(upvotePost(post)),
+		downvotePost: post => dispatch(downvotePost(post)),
+		deletePost: post => dispatch(deletePost(post))
 	};
 }
 

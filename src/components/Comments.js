@@ -8,9 +8,6 @@ class Comments extends Component {
     commentsToRender: []
   };
 
-  filterDeletedComments = comments =>
-    comments.filter(({ deleted }) => deleted === false);
-
   componentDidMount() {
     this.setState({
       commentsToRender: this.filterDeletedComments(this.props.comments),
@@ -25,6 +22,9 @@ class Comments extends Component {
       )
     };
   }
+
+  filterDeletedComments = comments =>
+    comments.filter(({ deleted }) => deleted === false);
 
   render() {
     const { commentsToRender } = this.state;

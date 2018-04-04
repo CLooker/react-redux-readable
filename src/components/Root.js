@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import { syncAllPosts, upvotePost, downvotePost, deletePost } from '../actions';
 import SortPosts from './SortPosts';
 import PostsList from './PostsList';
 import voteScoresDiff from '../utils/voteScoresDiff.js';
@@ -101,11 +101,13 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		syncAllPosts: posts => dispatch(actions.syncAllPosts(posts)),
-		upvotePost: post => dispatch(actions.upvotePost(post)),
-		downvotePost: post => dispatch(actions.downvotePost(post)),
-		deletePost: post => dispatch(actions.deletePost(post))
+		syncAllPosts: posts => dispatch(syncAllPosts(posts)),
+		upvotePost: post => dispatch(upvotePost(post)),
+		downvotePost: post => dispatch(downvotePost(post)),
+		deletePost: post => dispatch(deletePost(post))
 	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Root);
+
+

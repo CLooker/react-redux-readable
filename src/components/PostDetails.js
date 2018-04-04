@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import * as actions from '../actions';
+import { syncLocalPost, addComment } from '../actions';
 import Loading from './Loading';
 import Comments from './Comments';
 import PostDetailsPost from './PostDetailsPost';
@@ -113,9 +113,10 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		syncLocalPost: post => dispatch(actions.syncLocalPost(post)),
-		addComment: comment => dispatch(actions.addComment(comment))
+		syncLocalPost: post => dispatch(syncLocalPost(post)),
+		addComment: comment => dispatch(addComment(comment))
 	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);
+

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CreatePostForm from './CreatePostForm';
-import * as actions from '../actions';
+import { syncAllPosts, addPost } from '../actions';
 import returnUniqueValue from '../utils/returnUniqueValue.js';
 
 class CreatePost extends Component {
@@ -116,9 +116,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
 	return {
-		syncAllPosts: post => dispatch(actions.syncAllPosts(post)),
-		addPost: post => dispatch(actions.addPost(post))
+		syncAllPosts: post => dispatch(syncAllPosts(post)),
+		addPost: post => dispatch(addPost(post))
 	};
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(CreatePost);
+
+

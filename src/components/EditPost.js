@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EditPostInfo from './EditPostInfo';
-import * as actions from '../actions';
+import { syncLocalPost, editPost } from '../actions';
 
 class EditPost extends Component {
   state = {
@@ -116,9 +116,10 @@ class EditPost extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    syncLocalPost: post => dispatch(actions.syncLocalPost(post)),
-    editPost: post => dispatch(actions.editPost(post))
+    syncLocalPost: post => dispatch(syncLocalPost(post)),
+    editPost: post => dispatch(editPost(post))
   };
 }
 
 export default connect(null, mapDispatchToProps)(EditPost);
+

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CommentInfo from './CommentInfo';
 import CommentButtons from './CommentButtons';
-import * as actions from '../actions';
+import { upvoteComment, downvoteComment, deleteComment } from '../actions';
 
 class Comment extends Component {
   serverCommentUpvote = id =>
@@ -48,20 +48,23 @@ class Comment extends Component {
       .catch(err => console.log(err));
 
   render() {
-    const { comment, category } = this.props;
+    const {
+      category,
+      comment: { body, voteScore, author, timestamp, parentId, id }
+    } = this.props;
     return (
       <li className="comment">
         <CommentInfo
-          body={comment.body}
-          voteScore={comment.voteScore}
-          author={comment.author}
-          timestamp={comment.timestamp}
+          body={body}
+          voteScore={voteScore}
+          author={author}
+          timestamp={timestamp}
         />
         <br />
         <CommentButtons
           category={category}
-          parentId={comment.parentId}
-          id={comment.id}
+          parentId={parentId}
+          id={id}
           serverCommentDelete={this.serverCommentDelete}
           serverCommentUpvote={this.serverCommentUpvote}
           serverCommentDownvote={this.serverCommentDownvote}
@@ -73,10 +76,11 @@ class Comment extends Component {
 
 function mapDispatchToProps(dispatch) {
   return {
-    upvoteComment: commentId => dispatch(actions.upvoteComment(commentId)),
-    downvoteComment: commentId => dispatch(actions.downvoteComment(commentId)),
-    deleteComment: commentId => dispatch(actions.deleteComment(commentId))
+    upvoteComment: commentId => dispatch(upvoteComment(commentId)),
+    downvoteComment: commentId => dispatch(downvoteComment(commentId)),
+    deleteComment: commentId => dispatch(deleteComment(commentId))
   };
 }
 
 export default connect(null, mapDispatchToProps)(Comment);
+
