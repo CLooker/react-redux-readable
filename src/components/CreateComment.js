@@ -52,7 +52,7 @@ class CreateComment extends Component {
   };
 
   navigateToNewPost = (category, id) =>
-    this.props.history.push(`/${category}/${id}`);
+    this.props.history.push(`/react-redux-readable/${category}/${id}`);
 
   render() {
     const {

@@ -1,7 +1,7 @@
 import returnUniqueValue from './returnUniqueValue.js';
 
 const serverCreateComment = ({ body, author, parentId }) =>
-  fetch(`http://localhost:3001/comments`, {
+  fetch(`https://react-redux-readable-api.herokuapp.com/comments`, {
     method: 'POST',
     headers: {
       Authorization: 'react-redux-app',

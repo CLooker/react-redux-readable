@@ -20,7 +20,10 @@ const Post = ({
   <div className="post">
     <li>
       <p>
-        <Link to={`/${category}/${id}`} className="post-link">
+        <Link
+          to={`/react-redux-readable/${category}/${id}`}
+          className="post-link"
+        >
           {title}
         </Link>
       </p>
@@ -36,7 +39,10 @@ const Post = ({
       </p>
       <p>
         <strong>Category: </strong>
-        <Link to={`/${category}`} className="category-link">
+        <Link
+          to={`/react-redux-readable/${category}`}
+          className="category-link"
+        >
           {category}
         </Link>
       </p>

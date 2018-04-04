@@ -1,5 +1,5 @@
 const fetchComment = id =>
-  fetch(`http://localhost:3001/comments/${id}`, {
+  fetch(`https://react-redux-readable-api.herokuapp.com/comments/${id}`, {
     method: 'GET',
     headers: {
       Authorization: 'react-redux-app'

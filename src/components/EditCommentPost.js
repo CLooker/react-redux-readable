@@ -5,7 +5,10 @@ const EditCommentPost = ({ category, id, title, body }) => (
   <div>
     <div className="edit-comment-post-container">
       <p className="edit-comment-post-text">Post Title:</p>
-      <Link to={`/${category}/${id}`} className="post-link">
+      <Link
+        to={`/react-redux-readable/${category}/${id}`}
+        className="post-link"
+      >
         {title}
       </Link>
     </div>
@@ -13,7 +16,7 @@ const EditCommentPost = ({ category, id, title, body }) => (
       <p className="edit-comment-post-text">
         <strong>Post Category:</strong>{' '}
       </p>
-      <Link to={`/${category}`} className="category-link">
+      <Link to={`/react-redux-readable/${category}`} className="category-link">
         {category}
       </Link>
     </div>

@@ -1,5 +1,5 @@
 const serverDeletePost = id =>
-  fetch(`http://localhost:3001/posts/${id}`, {
+  fetch(`https://react-redux-readable-api.herokuapp.com/posts/${id}`, {
     method: 'DELETE',
     headers: {
       Authorization: 'react-redux-app',

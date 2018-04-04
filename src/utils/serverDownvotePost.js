@@ -1,5 +1,5 @@
 const serverDownvotePost = id =>
-  fetch(`http://localhost:3001/posts/${id}`, {
+  fetch(`https://react-redux-readable-api.herokuapp.com/posts/${id}`, {
     method: 'POST',
     headers: {
       Authorization: 'react-redux-app',

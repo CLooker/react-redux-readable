@@ -53,7 +53,7 @@ class EditComment extends Component {
   };
 
   navigateToParentPost = (category, id) =>
-    this.props.history.push(`/${category}/${id}`);
+    this.props.history.push(`/react-redux-readable/${category}/${id}`);
 
   handleCancel = e => {
     e.preventDefault();

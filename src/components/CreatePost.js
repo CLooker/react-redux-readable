@@ -21,7 +21,9 @@ class CreatePost extends Component {
       .catch(err => console.log(err));
 
   navigateToNewPost = id =>
-    this.props.history.push(`/${this.state.category}/${id}`);
+    this.props.history.push(
+      `/react-redux-readable/${this.state.category}/${id}`
+    );
 
   postIsValidated = ({ title, body, author, category }) =>
     serverCreatePost({ title, body, author, category })

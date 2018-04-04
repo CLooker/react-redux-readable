@@ -1,5 +1,5 @@
 const fetchLocalPosts = category =>
-  fetch(`http://localhost:3001/${category}/posts`, {
+  fetch(`https://react-redux-readable-api.herokuapp.com/${category}/posts`, {
     method: 'GET',
     headers: {
       Authorization: 'react-redux-app'

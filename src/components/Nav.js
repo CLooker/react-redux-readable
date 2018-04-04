@@ -24,7 +24,11 @@ class Nav extends Component {
         <ul className="nav">
           {[
             <li key="home">
-              <NavLink exact activeClassName="active" to="/">
+              <NavLink
+                exact
+                activeClassName="active"
+                to="/react-redux-readable"
+              >
                 <img
                   src={require('../assets/home_logo.jpg')}
                   alt="home"
@@ -35,7 +39,11 @@ class Nav extends Component {
           ].concat(
             this.props.categories.map(cat => (
               <li key={cat}>
-                <NavLink exact activeClassName="active" to={`/${cat}`}>
+                <NavLink
+                  exact
+                  activeClassName="active"
+                  to={`/react-redux-readable/${cat}`}
+                >
                   <img
                     src={require(`../assets/${cat}_logo.png`)}
                     alt={`${cat} posts`}
@@ -46,7 +54,11 @@ class Nav extends Component {
             ))
           )}
           <li key="add-post">
-            <NavLink exact activeClassName="active" to={'/create-post'}>
+            <NavLink
+              exact
+              activeClassName="active"
+              to={'/react-redux-readable/create-post'}
+            >
               <img
                 src={require('../assets/new_logo.png')}
                 alt="create post"

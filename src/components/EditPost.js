@@ -57,14 +57,18 @@ class EditPost extends Component {
       .then(res => this.props.editPost(res) && res.id)
       .then(id =>
         this.props.history.push(
-          `/${this.props.match.params.category}/${this.props.match.params.id}`
+          `/react-redux-readable/${this.props.match.params.category}/${
+            this.props.match.params.id
+          }`
         )
       );
   };
 
   handleCancel = () =>
     this.props.history.push(
-      `/${this.props.match.category}/${this.props.match.params.id}`
+      `/react-redux-readable/${this.props.match.category}/${
+        this.props.match.params.id
+      }`
     );
 
   render() {

@@ -10,7 +10,9 @@ const CommentButtons = ({
   serverCommentDownvote
 }) => (
   <div className="post-buttons">
-    <Link to={`/${category}/${parentId}/edit-comment/${id}`}>
+    <Link
+      to={`/react-redux-readable/${category}/${parentId}/edit-comment/${id}`}
+    >
       <button>Edit</button>
     </Link>
     <button onClick={() => serverCommentDelete(id)}>Delete</button>

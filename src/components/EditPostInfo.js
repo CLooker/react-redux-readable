@@ -34,7 +34,7 @@ const EditPostInfo = ({
     </p>
     <p>
       <strong>Category: </strong>
-      <Link to={`/${category}`} className="category-link">
+      <Link to={`/react-redux-readable/${category}`} className="category-link">
         {category}
       </Link>
     </p>

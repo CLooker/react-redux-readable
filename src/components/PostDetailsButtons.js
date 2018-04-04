@@ -9,13 +9,13 @@ const PostDetailsButtons = ({
   serverDownvotePost
 }) => (
   <div className="post-buttons">
-    <Link to={`/${category}/${id}/edit`}>
+    <Link to={`/react-redux-readable/${category}/${id}/edit`}>
       <button>Edit</button>
     </Link>
     <button onClick={() => serverDeletePost(id)}>Delete</button>
     <button onClick={() => serverUpvotePost(id)}>Upvote</button>
     <button onClick={() => serverDownvotePost(id)}>Downvote</button>
-    <Link to={`/${category}/${id}/create-comment`}>
+    <Link to={`/react-redux-readable/${category}/${id}/create-comment`}>
       <button>Comment</button>
     </Link>
   </div>

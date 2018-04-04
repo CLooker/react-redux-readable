@@ -1,7 +1,7 @@
 import returnUniqueValue from './returnUniqueValue.js';
 
 const serverCreatePost = ({ title, body, author, category }) =>
-  fetch('http://localhost:3001/posts/', {
+  fetch('https://react-redux-readable-api.herokuapp.com/posts/', {
     method: 'POST',
     headers: {
       Authorization: 'react-redux-app',

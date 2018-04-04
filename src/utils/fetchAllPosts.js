@@ -1,5 +1,5 @@
 const fetchAllPosts = () =>
-  fetch('http://localhost:3001/posts/', {
+  fetch('https://react-redux-readable-api.herokuapp.com/posts/', {
     method: 'GET',
     headers: {
       Authorization: 'react-redux-app'

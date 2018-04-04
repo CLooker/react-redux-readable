@@ -21,7 +21,7 @@ class PostDetailsPost extends Component {
   serverDeletePost = id =>
     serverDeletePost(id)
       .then(res => this.props.deletePost(res))
-      .then(() => this.props.history.push('/'))
+      .then(() => this.props.history.push('/react-redux-readable'))
       .catch(err => console.log(err));
 
   render() {
@@ -54,7 +54,10 @@ class PostDetailsPost extends Component {
           </p>
           <p>
             <strong>Category: </strong>
-            <Link to={`/${category}`} className="category-link">
+            <Link
+              to={`/react-redux-readable/${category}`}
+              className="category-link"
+            >
               {category}
             </Link>
           </p>
@@ -89,5 +92,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(null, mapDispatchToProps)(PostDetailsPost);
-
-

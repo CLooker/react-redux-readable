@@ -12,7 +12,7 @@ const CreateCommentPost = ({
   timestamp
 }) => (
   <div className="create-comment-post">
-    <Link to={`/${category}/${id}`} className="post-link">
+    <Link to={`/react-redux-readable/${category}/${id}`} className="post-link">
       {title}
     </Link>
     <p>{body}</p>
@@ -27,7 +27,7 @@ const CreateCommentPost = ({
     </p>
     <p>
       <strong>Category: </strong>
-      <Link to={`/${category}`} className="category-link">
+      <Link to={`/react-redux-readable/${category}`} className="category-link">
         {category}
       </Link>
     </p>

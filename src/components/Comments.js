@@ -4,8 +4,6 @@ import Comment from './Comment';
 import returnCommentsToRender from '../utils/returnCommentsToRender.js';
 
 class Comments extends Component {
-  // use constructor to initialize state
-  // was setting state in componentDidMount, but that caused an extra render
   constructor(props) {
     super(props);
     this.state = {
