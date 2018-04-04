@@ -19,11 +19,7 @@ export default class App extends Component {
       <Router>
         <div>
           <Route path="" component={Nav} />
-          <Route
-            exact
-            path="https://clooker.github.io/react-redux-readable/"
-            component={Root}
-          />
+          <Route exact path="/" component={Root} />
           <Route
             exact
             path="/react-redux-readable/:category"

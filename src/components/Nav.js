@@ -24,11 +24,7 @@ class Nav extends Component {
         <ul className="nav">
           {[
             <li key="home">
-              <NavLink
-                exact
-                activeClassName="active"
-                to="https://clooker.github.io/react-redux-readable/"
-              >
+              <NavLink exact activeClassName="active" to="/">
                 <img
                   src={require('../assets/home_logo.jpg')}
                   alt="home"
