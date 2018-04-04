@@ -42,12 +42,12 @@ export default class App extends Component {
           />
           <Route
             exact
-            path="/react-redux-readable.com/:category/:id/edit-comment/:commentId"
+            path="/react-redux-readable/:category/:id/edit-comment/:commentId"
             component={EditComment}
           />
           <Route
             exact
-            path="/react-redux-readable.com/create-post"
+            path="/react-redux-readable/create-post"
             component={CreatePost}
           />
         </div>
