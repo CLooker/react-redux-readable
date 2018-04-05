@@ -1,7 +1,7 @@
 body {
   min-width: 580px;
   overflow: auto;
-  height: 100vh;
+  margin-bottom: 60px;
 }
 
 * {
@@ -11,6 +11,26 @@ body {
 ul {
   padding: 0;
   list-style-type: none;
+}
+
+.root,
+.category-posts,
+.post-details,
+.edit-comment-container {
+  margin: 70px 0 80px;
+}
+
+.create-comment {
+  margin: 70px 0 0;
+}
+
+.edit-comment-form-container {
+  width: 594px;
+  min-height: 400px;
+}
+
+div.edit-post-container {
+  margin-top: 90px;
 }
 
 .root,
@@ -26,16 +46,19 @@ ul {
   flex-direction: column;
 }
 
-.edit-post-container {
+.edit-post-info-container {
   display: flex;
   justify-content: center;
 }
 
 .create-comment-post {
-  min-width: 520px;
+  width: 594px;
+  min-height: 400px;
 }
 
 .create-post-form-container {
+  width: 594px;
+  min-height: 400px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -56,7 +79,14 @@ ul {
   justify-content: center;
   align-items: center;
   list-style-type: none;
-  padding: 0;
+  padding: 10px 0;
+  border-bottom: solid 1px lightgrey;
+  position: fixed;
+  top: -20px;
+  left: 0;
+  right: 0;
+  background-color: white;
+  z-index: 1000;
 }
 
 .comments-container {
@@ -113,7 +143,7 @@ div.post-buttons {
 
 div.post {
   width: 594px;
-  height: 400px;
+  min-height: 400px;
 }
 
 .comments-list {
@@ -130,12 +160,12 @@ div.post {
 
 .post {
   margin-bottom: 20px;
-  border: 2px solid grey;
+  border: 1px solid grey;
   padding: 20px;
 }
 
 .create-comment-post {
-  border: 2px solid grey;
+  border: 1px solid grey;
   padding: 20px;
 }
 
@@ -145,7 +175,7 @@ div.post {
 }
 
 .comment {
-  border: 2px solid grey;
+  border: 1px solid grey;
   padding: 20px;
   margin-top: 10px;
 }
@@ -166,7 +196,6 @@ div.post {
 .all-posts-title,
 .category-title,
 .edit-comment-title,
-.edit-post-title,
 .create-comment-title,
 .post-details-post-title {
   text-align: center;
@@ -176,12 +205,23 @@ div.post {
   margin-bottom: 20px;
 }
 
+.edit-post-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: x-large;
+  margin: 20px 0 40px;
+}
+
 .create-post-container {
-  margin-bottom: 20px;
+  margin-top: -70px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.edit-post .post-buttons button {
+  margin: 30px 0;
 }
 
 .create-post-label-title {
@@ -194,18 +234,17 @@ div.post {
 }
 
 .create-post-form-container {
-  border: 2px solid grey;
-  margin-top: -12px;
-  padding: 0 0 20px;
-  width: 590px;
-  height: 320px;
+  border: 1px solid grey;
+  margin-top: -11px;
+  width: 594px;
+  min-height: 400px;
 }
 
 .create-post-title {
   text-align: center;
   font-weight: bold;
   font-size: x-large;
-  margin-top: -12px;
+  margin-top: -20px;
   margin-bottom: 48px;
 }
 
@@ -231,6 +270,11 @@ div.post {
 .create-comment-form {
   display: flex;
   flex-direction: column;
+}
+
+.create-comment-submit-input-container {
+  display: flex;
+  justify-content: center;
 }
 
 input,
@@ -262,25 +306,30 @@ select {
   font-weight: normal;
 }
 
-.create-comment input:last-child {
-  height: 50px;
+.create-comment-submit-input {
+  height: 30px;
+  width: 70px;
 }
 
-.create-comment-author,
+.create-comment-author-input {
+  line-height: 2em;
+}
+
+.create-comment-author {
+  text-align: center;
+  margin-top: -1px;
+}
+
 .create-comment-body {
   text-align: center;
-}
-
-.create-comment button {
-  width: 100px;
-  margin: 10px;
+  margin-top: 20px;
 }
 
 .edit-comment-form-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 2px solid grey;
+  border: 1px solid grey;
   padding: 20px;
 }
 
@@ -299,7 +348,15 @@ div.post {
 .footer {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: center;
+  padding: 10px 0;
+  height: 60px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: solid 1px lightgrey;
+  background-color: white;
 }
 
 .footer img {

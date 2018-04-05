@@ -5,14 +5,11 @@ import Resume from './Resume';
 import Portfolio from './Portfolio';
 
 const Footer = () => (
-  <div>
-    <hr />
-    <div className="footer">
-      <LinkedIn />
-      <GitHub />
-      <Resume />
-      <Portfolio />
-    </div>
+  <div className="footer">
+    <LinkedIn />
+    <GitHub />
+    <Resume />
+    <Portfolio />
   </div>
 );
 

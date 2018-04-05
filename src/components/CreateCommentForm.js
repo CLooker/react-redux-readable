@@ -7,7 +7,7 @@ const CreateCommentForm = ({
   handleBodyChange,
   handleAuthorChange
 }) => (
-  <div className="create-comment">
+  <div className="create-comment-form-container">
     <form className="create-comment-form" onSubmit={handleSubmit}>
       <label>
         <p className="create-comment-body">
@@ -17,16 +17,27 @@ const CreateCommentForm = ({
           value={body}
           onChange={handleBodyChange}
           columns="50"
-          rows="10"
+          rows="5"
         />
       </label>
       <label>
         <p className="create-comment-author">
           <strong>Author</strong>
         </p>
-        <input type="text" value={author} onChange={handleAuthorChange} />
+        <input
+          className="create-comment-author-input"
+          type="text"
+          value={author}
+          onChange={handleAuthorChange}
+        />
       </label>
-      <input type="submit" value="Submit" />
+      <div className="create-comment-submit-input-container">
+        <input
+          className="create-comment-submit-input"
+          type="submit"
+          value="Submit"
+        />
+      </div>
     </form>
   </div>
 );

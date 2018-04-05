@@ -84,9 +84,9 @@ class EditPost extends Component {
     } = this.state;
     return (
       !deleted && (
-        <div>
+        <div className="edit-post-container">
           <div className="edit-post-title">Edit Post</div>
-          <div className="edit-post-container">
+          <div className="edit-post-info-container">
             <EditPostInfo
               title={title}
               handleTitleChange={this.handleTitleChange}

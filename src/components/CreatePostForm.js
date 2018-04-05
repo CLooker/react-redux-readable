@@ -18,7 +18,7 @@ const CreatePostForm = ({
       <label>Author:</label>
       <input type="text" value={author} onChange={handleAuthorChange} />
       <label>Post Body:</label>
-      <textarea value={body} onChange={handleBodyChange} />
+      <textarea rows="10" value={body} onChange={handleBodyChange} />
       <select value={category} onChange={handleCategoryChange}>
         <option disabled>Select Post Category...</option>
         <option value="react">React</option>

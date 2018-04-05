@@ -9,7 +9,7 @@ const EditCommentForm = ({
   <form className="edit-comment-form">
     <label className="edit-comment-form-body">
       <strong>Comment Body: </strong>
-      <input type="text" value={body} onChange={handleBodyChange} />
+      <textarea value={body} onChange={handleBodyChange} />
     </label>
     <br />
     <div className="post-buttons">

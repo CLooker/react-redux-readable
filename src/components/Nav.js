@@ -20,55 +20,48 @@ class Nav extends Component {
 
   render() {
     return (
-      <div>
-        <ul className="nav">
-          {[
-            <li key="home">
-              <NavLink
-                exact
-                activeClassName="active"
-                to="/react-redux-readable/"
-              >
-                <img
-                  src={require('../assets/home_logo.jpg')}
-                  alt="home"
-                  title="home"
-                />
-              </NavLink>
-            </li>
-          ].concat(
-            this.props.categories.map(cat => (
-              <li key={cat}>
-                <NavLink
-                  exact
-                  activeClassName="active"
-                  to={`/react-redux-readable/${cat}`}
-                >
-                  <img
-                    src={require(`../assets/${cat}_logo.png`)}
-                    alt={`${cat} posts`}
-                    title={cat}
-                  />
-                </NavLink>
-              </li>
-            ))
-          )}
-          <li key="add-post">
-            <NavLink
-              exact
-              activeClassName="active"
-              to={'/react-redux-readable/create-post'}
-            >
+      <ul className="nav">
+        {[
+          <li key="home">
+            <NavLink exact activeClassName="active" to="/react-redux-readable/">
               <img
-                src={require('../assets/new_logo.png')}
-                alt="create post"
-                title="create post"
+                src={require('../assets/home_logo.jpg')}
+                alt="home"
+                title="home"
               />
             </NavLink>
           </li>
-        </ul>
-        <hr />
-      </div>
+        ].concat(
+          this.props.categories.map(cat => (
+            <li key={cat}>
+              <NavLink
+                exact
+                activeClassName="active"
+                to={`/react-redux-readable/${cat}`}
+              >
+                <img
+                  src={require(`../assets/${cat}_logo.png`)}
+                  alt={`${cat} posts`}
+                  title={cat}
+                />
+              </NavLink>
+            </li>
+          ))
+        )}
+        <li key="add-post">
+          <NavLink
+            exact
+            activeClassName="active"
+            to={'/react-redux-readable/create-post'}
+          >
+            <img
+              src={require('../assets/new_logo.png')}
+              alt="create post"
+              title="create post"
+            />
+          </NavLink>
+        </li>
+      </ul>
     );
   }
 }
