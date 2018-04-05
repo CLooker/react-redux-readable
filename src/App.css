@@ -109,12 +109,11 @@ div.post-buttons {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 10px;
 }
 
 div.post {
   width: 594px;
-  height: 360px;
+  height: 400px;
 }
 
 .comments-list {
