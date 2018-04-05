@@ -8,6 +8,7 @@ import PostDetails from './PostDetails';
 import EditPost from './EditPost';
 import CreateComment from './CreateComment';
 import EditComment from './EditComment';
+import Footer from './Footer';
 import '../App.css';
 
 // validate all forms
@@ -50,6 +51,7 @@ export default class App extends Component {
             path="/react-redux-readable/create-post"
             component={CreatePost}
           />
+          <Route path="" component={Footer} />
         </div>
       </Router>
     );
