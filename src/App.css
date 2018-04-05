@@ -1,5 +1,5 @@
 body {
-  min-width: 850px;
+  min-width: 580px;
   overflow: auto;
   height: 100vh;
 }
@@ -33,6 +33,12 @@ ul {
 
 .create-comment-post {
   min-width: 520px;
+}
+
+.create-post-form-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .category-posts,
@@ -106,7 +112,8 @@ div.post-buttons {
 }
 
 div.post {
-  width: 550px;
+  width: 594px;
+  height: 360px;
 }
 
 .comments-list {
@@ -161,13 +168,45 @@ div.post {
 .edit-comment-title,
 .edit-post-title,
 .create-comment-title,
-.create-post-title,
 .post-details-post-title {
   text-align: center;
   font-weight: bold;
   font-size: x-large;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+.create-post-container {
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.create-post-label-title {
+  padding: 10px 0 0;
+}
+
+.create-post label {
+  font-size: 15px;
+  font-weight: bolder;
+}
+
+.create-post-form-container {
+  border: 2px solid grey;
+  margin-top: -12px;
+  padding: 0 0 20px;
+  width: 590px;
+  height: 320px;
+}
+
+.create-post-title {
+  text-align: center;
+  font-weight: bold;
+  font-size: x-large;
+  margin-top: -12px;
+  margin-bottom: 48px;
 }
 
 .root-title-and-sort-container,
@@ -251,4 +290,8 @@ select {
   align-items: center;
   min-width: 520px;
   padding: 0;
+}
+
+div.post {
+  width: 594px;
 }
