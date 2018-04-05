@@ -12,7 +12,7 @@ import Footer from './Footer';
 import '../App.css';
 
 // validate all forms
-// change links to /react-redux-readable
+// figure out how to let user know heroku is loading
 
 export default class App extends Component {
   render() {
