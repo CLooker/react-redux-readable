@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import CreateCommentPost from './CreateCommentPost';
 import CreateCommentForm from './CreateCommentForm';
+import Loading from './Loading';
 import { addComment } from '../actions';
 import fetchLocalPost from '../utils/fetchLocalPost.js';
 import serverCreateComment from '../utils/serverCreateComment.js';
@@ -30,6 +31,7 @@ class CreateComment extends Component {
           parentCommentCount: commentCount
         })
       )
+      .then(() => !this.props.herokuLoaded && this.props.updateHerokuStatus())
       .catch(err => console.log(err));
   }
 
@@ -65,7 +67,7 @@ class CreateComment extends Component {
       body,
       author
     } = this.state;
-    return (
+    return this.props.herokuLoaded ? (
       <div className="create-comment">
         <div className="create-comment-title">Create Comment</div>
         <CreateCommentPost
@@ -86,6 +88,8 @@ class CreateComment extends Component {
           handleAuthorChange={this.handleAuthorChange}
         />
       </div>
+    ) : (
+      <Loading style={{ marginTop: '120px' }} />
     );
   }
 }

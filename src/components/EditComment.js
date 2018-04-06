@@ -5,6 +5,7 @@ import fetchLocalPost from '../utils/fetchLocalPost.js';
 import serverEditComment from '../utils/serverEditComment.js';
 import EditCommentPost from './EditCommentPost';
 import EditCommentForm from './EditCommentForm';
+import Loading from './Loading';
 import { editComment } from '../actions';
 
 class EditComment extends Component {
@@ -24,15 +25,16 @@ class EditComment extends Component {
           deleted: res.deleted
         })
       )
-      .then(() => {
+      .then(() =>
         fetchLocalPost(this.props.match.params.id).then(res =>
           this.setState({
             parentTitle: res.title,
             parentBody: res.body,
             parentCategory: res.category
           })
-        );
-      });
+        )
+      )
+      .then(() => !this.props.herokuLoaded && this.props.updateHerokuStatus());
   }
 
   handleBodyChange = e => this.setState({ body: e.target.value });
@@ -71,7 +73,7 @@ class EditComment extends Component {
       body,
       deleted
     } = this.state;
-    return (
+    return this.props.herokuLoaded ? (
       !deleted && (
         <div className="edit-comment-container">
           <div className="edit-comment-title">Edit Comment</div>
@@ -93,6 +95,8 @@ class EditComment extends Component {
           </div>
         </div>
       )
+    ) : (
+      <Loading style={{ marginTop: '120px' }} />
     );
   }
 }

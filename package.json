@@ -4,8 +4,10 @@
   "homepage": "https://clooker.github.io/react-redux-readable",
   "private": true,
   "dependencies": {
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-dots-loader": "^1.1.4",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",

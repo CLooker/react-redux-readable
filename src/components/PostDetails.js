@@ -11,7 +11,6 @@ import fetchLocalPost from '../utils/fetchLocalPost.js';
 
 class PostDetails extends Component {
 	state = {
-		isFetching: false,
 		id: '',
 		title: '',
 		body: '',
@@ -37,8 +36,12 @@ class PostDetails extends Component {
 			.then(
 				res => res.forEach(comment => this.props.addComment(comment)) || res
 			)
-			.then(res => this.setState({ comments: [...res], isFetching: false }))
-
+			.then(res =>
+				this.setState({
+					comments: [...res]
+				})
+			)
+			.then(() => !this.props.herokuLoaded && this.props.updateHerokuStatus())
 			.catch(err => err);
 
 	fetchPost = post => {
@@ -47,7 +50,7 @@ class PostDetails extends Component {
 				res =>
 					Object.keys(res).length > 0
 						? this.props.syncLocalPost(res) && res
-						: { deleted: true }
+						: this.setState({ deleted: true })
 			)
 			.then(
 				({
@@ -78,29 +81,25 @@ class PostDetails extends Component {
 	};
 
 	render() {
-		const { isFetching, deleted, comments } = this.state;
-		return (
+		const { deleted, comments } = this.state;
+		return this.props.herokuLoaded ? (
 			<div className="post-details">
-				{isFetching ? (
-					<Loading />
-				) : (
+				{!deleted ? (
 					<div>
-						{!deleted ? (
-							<div>
-								<PostDetailsPost {...this.state} {...this.props} />
-								<Comments
-									fetchComments={this.fetchComments}
-									comments={comments}
-									parentId={this.props.match.params.id}
-									category={this.props.match.params.category}
-								/>
-							</div>
-						) : (
-							<NoMatch location={this.props.location} />
-						)}
+						<PostDetailsPost {...this.state} {...this.props} />
+						<Comments
+							fetchComments={this.fetchComments}
+							comments={comments}
+							parentId={this.props.match.params.id}
+							category={this.props.match.params.category}
+						/>
 					</div>
+				) : (
+					<NoMatch location={this.props.location} />
 				)}
 			</div>
+		) : (
+			<Loading style={{ marginTop: '120px' }} />
 		);
 	}
 }

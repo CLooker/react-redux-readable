@@ -367,3 +367,12 @@ div.post {
 .portfolio img {
   padding-left: 8px;
 }
+
+.loading {
+  display: flex;
+  justify-content: center;
+}
+
+.loading * {
+  margin: 0 2px;
+}

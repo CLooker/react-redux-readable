@@ -15,36 +15,63 @@ import '../App.css';
 // figure out how to let user know heroku is loading
 
 export default class App extends Component {
+  state = {
+    herokuLoaded: false
+  };
+
+  updateHerokuStatus = () =>
+    !this.state.herokuLoaded && this.setState({ herokuLoaded: true });
+
+  componentProps = routeProps => ({
+    herokuLoaded: this.state.herokuLoaded,
+    updateHerokuStatus: this.updateHerokuStatus,
+    ...routeProps
+  });
+
   render() {
     return (
       <Router>
         <div>
           <Route path="" component={Nav} />
-          <Route exact path="/react-redux-readable/" component={Root} />
+          <Route
+            exact
+            path="/react-redux-readable/"
+            render={routeProps => <Root {...this.componentProps(routeProps)} />}
+          />
           <Route
             exact
             path="/react-redux-readable/:category"
-            component={CategoryPosts}
+            render={routeProps => (
+              <CategoryPosts {...this.componentProps(routeProps)} />
+            )}
           />
           <Route
             exact
             path="/react-redux-readable/:category/:id"
-            component={PostDetails}
+            render={routeProps => (
+              <PostDetails {...this.componentProps(routeProps)} />
+            )}
           />
           <Route
             exact
             path="/react-redux-readable/:category/:id/edit"
-            component={EditPost}
+            render={routeProps => (
+              <EditPost {...this.componentProps(routeProps)} />
+            )}
           />
           <Route
             exact
             path="/react-redux-readable/:category/:id/create-comment"
-            component={CreateComment}
+            render={routeProps => (
+              <CreateComment {...this.componentProps(routeProps)} />
+            )}
           />
           <Route
             exact
             path="/react-redux-readable/:category/:id/edit-comment/:commentId"
-            component={EditComment}
+            render={routeProps => (
+              <EditComment {...this.componentProps(routeProps)} />
+            )}
           />
           <Route
             exact

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import EditPostInfo from './EditPostInfo';
+import Loading from './Loading';
 import fetchLocalPost from '../utils/fetchLocalPost.js';
 import serverPostEdit from '../utils/serverPostEdit.js';
 import { syncLocalPost, editPost } from '../actions';
@@ -41,7 +42,8 @@ class EditPost extends Component {
             timestamp,
             deleted
           })
-      );
+      )
+      .then(() => !this.props.herokuLoaded && this.props.updateHerokuStatus());
   }
 
   handleTitleChange = e => this.setState({ title: e.target.value });
@@ -82,7 +84,7 @@ class EditPost extends Component {
       voteScore,
       commentCount
     } = this.state;
-    return (
+    return this.props.herokuLoaded ? (
       !deleted && (
         <div className="edit-post-container">
           <div className="edit-post-title">Edit Post</div>
@@ -103,6 +105,8 @@ class EditPost extends Component {
           </div>
         </div>
       )
+    ) : (
+      <Loading style={{ marginTop: '120px' }} />
     );
   }
 }

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { syncAllPosts, upvotePost, downvotePost, deletePost } from '../actions';
 import SortPosts from './SortPosts';
 import PostsList from './PostsList';
+import Loading from './Loading';
 import voteScoresDiff from '../utils/voteScoresDiff.js';
 import fetchAllPosts from '../utils/fetchAllPosts.js';
 import sortByTimeStamp from '../utils/sortByTimeStamp.js';
@@ -28,7 +29,12 @@ class Root extends Component {
 	fetchAllPosts = () =>
 		fetchAllPosts()
 			.then(res => this.props.syncAllPosts(res) && res)
-			.then(res => this.setState({ postsToRender: res }))
+			.then(res =>
+				this.setState({
+					postsToRender: res
+				})
+			)
+			.then(() => this.props.updateHerokuStatus())
 			.catch(err => console.log(err));
 
 	serverUpvotePost = id =>
@@ -62,28 +68,34 @@ class Root extends Component {
 	render() {
 		return (
 			<div className="root">
-				{this.state.postsToRender.length > 0 && (
+				{this.props.herokuLoaded ? (
 					<div>
-						<div className="root-title-and-sort-container">
-							<div className="all-posts-title">All</div>
-							{this.state.postsToRender.length > 1 && (
-								<div className="sort-posts">
-									<SortPosts
-										order={this.state.order}
-										sortByTimeStamp={this.sortByTimeStamp}
-										sortByVoteScore={this.sortByVoteScore}
-									/>
+						{this.state.postsToRender.length > 0 && (
+							<div>
+								<div className="root-title-and-sort-container">
+									<div className="all-posts-title">All</div>
+									{this.state.postsToRender.length > 1 && (
+										<div className="sort-posts">
+											<SortPosts
+												order={this.state.order}
+												sortByTimeStamp={this.sortByTimeStamp}
+												sortByVoteScore={this.sortByVoteScore}
+											/>
+										</div>
+									)}
 								</div>
-							)}
-						</div>
-						<PostsList
-							postsToRender={this.state.postsToRender}
-							serverDeletePost={this.serverDeletePost}
-							serverUpvotePost={this.serverUpvotePost}
-							serverDownvotePost={this.serverDownvotePost}
-							{...this.props}
-						/>
+								<PostsList
+									postsToRender={this.state.postsToRender}
+									serverDeletePost={this.serverDeletePost}
+									serverUpvotePost={this.serverUpvotePost}
+									serverDownvotePost={this.serverDownvotePost}
+									{...this.props}
+								/>
+							</div>
+						)}
 					</div>
+				) : (
+					<Loading style={{ marginTop: '50px' }} />
 				)}
 			</div>
 		);
@@ -109,5 +121,3 @@ function mapDispatchToProps(dispatch) {
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Root);
-
-

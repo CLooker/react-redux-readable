@@ -9,6 +9,7 @@ import {
 } from '../actions';
 import SortPosts from './SortPosts';
 import PostsList from './PostsList';
+import Loading from './Loading';
 import voteScoresDiff from '../utils/voteScoresDiff.js';
 import fetchLocalPosts from '../utils/fetchLocalPosts.js';
 import sortByTimeStamp from '../utils/sortByTimeStamp.js';
@@ -45,6 +46,7 @@ class CategoryPosts extends Component {
           postsToRender: [...res]
         })
       )
+      .then(() => !this.props.herokuLoaded && this.props.updateHerokuStatus())
       .catch(err => console.log(err));
 
   serverUpvotePost = id =>
@@ -79,7 +81,7 @@ class CategoryPosts extends Component {
     title.split('').map((l, i) => (i === 0 ? l.toUpperCase() : l));
 
   render() {
-    return (
+    return this.props.herokuLoaded ? (
       <div className="category-posts">
         <div className="category-title-and-sort-container">
           {this.state.postsToRender.length > 0 && (
@@ -106,6 +108,8 @@ class CategoryPosts extends Component {
           {...this.props}
         />
       </div>
+    ) : (
+      <Loading style={{ marginTop: '120px' }} />
     );
   }
 }
