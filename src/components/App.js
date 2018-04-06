@@ -12,6 +12,7 @@ import NoMatch from './NoMatch';
 import Footer from './Footer';
 import '../App.css';
 
+// postDetails upon creating new post displays nomatch
 // validate all forms
 
 export default class App extends Component {

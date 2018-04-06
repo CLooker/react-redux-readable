@@ -105,12 +105,12 @@ class PostDetails extends Component {
 								/>
 							</div>
 						) : (
-							<NoMatch location={this.props.location} />
+							<NoMatch location={this.props.location} hidden={true} />
 						)}
 					</div>
 				)
 			) : (
-				<NoMatch location={this.props.location} />
+				<NoMatch location={this.props.location} hidden={true} />
 			)
 		) : (
 			<Loading />
