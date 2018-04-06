@@ -19,7 +19,7 @@ class NoMatch extends Component {
 
   startRenderTimer = () =>
     this.setState({
-      intervalId: setInterval(() => this.setState({ hidden: false }), 50)
+      intervalId: setInterval(() => this.setState({ hidden: false }), 500)
     });
 
   render() {
