@@ -99,7 +99,7 @@ class PostDetails extends Component {
 				)}
 			</div>
 		) : (
-			<Loading style={{ marginTop: '120px' }} />
+			<Loading />
 		);
 	}
 }

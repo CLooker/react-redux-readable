@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Nav from './Nav';
 import Root from './Root';
 import CreatePost from './CreatePost';
@@ -12,7 +12,6 @@ import Footer from './Footer';
 import '../App.css';
 
 // validate all forms
-// figure out how to let user know heroku is loading
 
 export default class App extends Component {
   state = {
@@ -32,53 +31,57 @@ export default class App extends Component {
     return (
       <Router>
         <div>
-          <Route path="" component={Nav} />
-          <Route
-            exact
-            path="/react-redux-readable/"
-            render={routeProps => <Root {...this.componentProps(routeProps)} />}
-          />
-          <Route
-            exact
-            path="/react-redux-readable/:category"
-            render={routeProps => (
-              <CategoryPosts {...this.componentProps(routeProps)} />
-            )}
-          />
-          <Route
-            exact
-            path="/react-redux-readable/:category/:id"
-            render={routeProps => (
-              <PostDetails {...this.componentProps(routeProps)} />
-            )}
-          />
-          <Route
-            exact
-            path="/react-redux-readable/:category/:id/edit"
-            render={routeProps => (
-              <EditPost {...this.componentProps(routeProps)} />
-            )}
-          />
-          <Route
-            exact
-            path="/react-redux-readable/:category/:id/create-comment"
-            render={routeProps => (
-              <CreateComment {...this.componentProps(routeProps)} />
-            )}
-          />
-          <Route
-            exact
-            path="/react-redux-readable/:category/:id/edit-comment/:commentId"
-            render={routeProps => (
-              <EditComment {...this.componentProps(routeProps)} />
-            )}
-          />
-          <Route
-            exact
-            path="/react-redux-readable/create-post"
-            component={CreatePost}
-          />
-          <Route path="" component={Footer} />
+          <Nav />
+          <Switch>
+            <Route
+              exact
+              path="/react-redux-readable/create-post"
+              component={CreatePost}
+            />
+            <Route
+              exact
+              path="/react-redux-readable/"
+              render={routeProps => (
+                <Root {...this.componentProps(routeProps)} />
+              )}
+            />
+            <Route
+              exact
+              path="/react-redux-readable/:category"
+              render={routeProps => (
+                <CategoryPosts {...this.componentProps(routeProps)} />
+              )}
+            />
+            <Route
+              exact
+              path="/react-redux-readable/:category/:id"
+              render={routeProps => (
+                <PostDetails {...this.componentProps(routeProps)} />
+              )}
+            />
+            <Route
+              exact
+              path="/react-redux-readable/:category/:id/edit"
+              render={routeProps => (
+                <EditPost {...this.componentProps(routeProps)} />
+              )}
+            />
+            <Route
+              exact
+              path="/react-redux-readable/:category/:id/create-comment"
+              render={routeProps => (
+                <CreateComment {...this.componentProps(routeProps)} />
+              )}
+            />
+            <Route
+              exact
+              path="/react-redux-readable/:category/:id/edit-comment/:commentId"
+              render={routeProps => (
+                <EditComment {...this.componentProps(routeProps)} />
+              )}
+            />
+          </Switch>
+          <Footer />
         </div>
       </Router>
     );

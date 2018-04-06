@@ -34,7 +34,8 @@ class EditComment extends Component {
           })
         )
       )
-      .then(() => !this.props.herokuLoaded && this.props.updateHerokuStatus());
+      .then(() => !this.props.herokuLoaded && this.props.updateHerokuStatus())
+      .catch(err => console.log(err));
   }
 
   handleBodyChange = e => this.setState({ body: e.target.value });
@@ -96,7 +97,7 @@ class EditComment extends Component {
         </div>
       )
     ) : (
-      <Loading style={{ marginTop: '120px' }} />
+      <Loading />
     );
   }
 }
