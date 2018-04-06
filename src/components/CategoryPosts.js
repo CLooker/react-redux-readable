@@ -20,6 +20,7 @@ import serverDeletePost from '../utils/serverDeletePost.js';
 
 class CategoryPosts extends Component {
   state = {
+    category: null,
     postsToRender: [],
     order: null
   };
@@ -43,6 +44,7 @@ class CategoryPosts extends Component {
       .then(res => this.props.syncLocalPosts(res) && res)
       .then(res =>
         this.setState({
+          category,
           postsToRender: [...res]
         })
       )
@@ -82,32 +84,34 @@ class CategoryPosts extends Component {
 
   render() {
     return this.props.herokuLoaded ? (
-      <div className="category-posts">
-        <div className="category-title-and-sort-container">
-          {this.state.postsToRender.length > 0 && (
-            <h1 className="category-title">
-              {this.capitalizeTitle(this.props.match.params.category)}
-            </h1>
-          )}
-          {this.state.postsToRender.length > 1 && (
-            <div className="sort-posts">
-              <SortPosts
-                sortByTimeStamp={this.sortByTimeStamp}
-                sortByVoteScore={this.sortByVoteScore}
-                order={this.state.order}
-              />
-            </div>
-          )}
-        </div>
+      this.state.category === this.props.match.params.category && (
+        <div className="category-posts">
+          <div className="category-title-and-sort-container">
+            {this.state.postsToRender.length > 0 && (
+              <h1 className="category-title">
+                {this.capitalizeTitle(this.props.match.params.category)}
+              </h1>
+            )}
+            {this.state.postsToRender.length > 1 && (
+              <div className="sort-posts">
+                <SortPosts
+                  sortByTimeStamp={this.sortByTimeStamp}
+                  sortByVoteScore={this.sortByVoteScore}
+                  order={this.state.order}
+                />
+              </div>
+            )}
+          </div>
 
-        <PostsList
-          postsToRender={this.state.postsToRender}
-          serverDeletePost={this.serverDeletePost}
-          serverUpvotePost={this.serverUpvotePost}
-          serverDownvotePost={this.serverDownvotePost}
-          {...this.props}
-        />
-      </div>
+          <PostsList
+            postsToRender={this.state.postsToRender}
+            serverDeletePost={this.serverDeletePost}
+            serverUpvotePost={this.serverUpvotePost}
+            serverDownvotePost={this.serverDownvotePost}
+            {...this.props}
+          />
+        </div>
+      )
     ) : (
       <Loading />
     );

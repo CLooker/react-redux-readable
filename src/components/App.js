@@ -31,7 +31,7 @@ export default class App extends Component {
     return (
       <Router>
         <div>
-          <Nav />
+          <Route path="" component={Nav} />
           <Switch>
             <Route
               exact
