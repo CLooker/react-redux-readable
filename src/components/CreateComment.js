@@ -47,9 +47,10 @@ class CreateComment extends Component {
 
   handleSubmit = type =>
     type === 'submit'
-      ? serverCreateComment({
-          body: this.state.body,
-          author: this.state.author,
+      ? this.inputValidated() &&
+        serverCreateComment({
+          body: this.state.body.trim(),
+          author: this.state.author.trim(),
           parentId: this.props.match.params.id
         }).then(() =>
           this.navigateToPost(
@@ -61,6 +62,16 @@ class CreateComment extends Component {
           this.props.match.params.category,
           this.props.match.params.id
         );
+
+  inputValidated = () => this.bodyValidated() && this.authorValidated();
+
+  bodyValidated = () =>
+    this.state.body.trim() !== '' ? true : alert('Body cannot be blank.');
+
+  authorValidated = () =>
+    this.state.author.trim() !== ''
+      ? true
+      : alert('Author cannot be blank.') || false;
 
   navigateToPost = (category, id) =>
     this.props.history.push(`/react-redux-readable/${category}/${id}`);

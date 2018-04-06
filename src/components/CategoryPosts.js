@@ -24,11 +24,7 @@ class CategoryPosts extends Component {
   state = {
     category: null,
     postsToRender: [],
-    order: null,
-    validateCategory: () =>
-      this.props.categories.some(
-        cat => cat === this.props.match.params.category
-      )
+    order: null
   };
 
   componentDidMount() {
@@ -96,23 +92,16 @@ class CategoryPosts extends Component {
   localCategoryMatchesProps = () =>
     this.state.category === this.props.match.params.category;
 
-  localCategoryIsValid = () => {
-    const x = this.props.categories.some(
-      cat => cat === this.props.match.params.category
-    );
-    console.log(this.state.category);
-    console.log(this.props.categories);
-    console.log(x);
-    return x;
-  };
-
   categoryHasPosts = () => this.state.postsToRender.length > 0;
 
   categoryHasMultiplePosts = () => this.state.postsToRender.length > 1;
 
+  validateCategory = () =>
+    this.props.categories.some(cat => cat === this.props.match.params.category);
+
   render() {
     return this.props.herokuLoaded ? (
-      this.state.validateCategory() ? (
+      this.validateCategory() ? (
         <div className="category-posts">
           <div className="category-title-and-sort-container">
             <h1 className="category-title">{this.state.category}</h1>

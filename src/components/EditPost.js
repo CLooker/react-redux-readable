@@ -59,24 +59,35 @@ class EditPost extends Component {
   handleBodyChange = e => this.setState({ body: e.target.value });
 
   handleSubmit = () => {
-    serverPostEdit({
-      id: this.props.match.params.id,
-      title: this.state.title,
-      body: this.state.body
-    })
-      .then(res => this.props.editPost(res) && res.id)
-      .then(id =>
-        this.props.history.push(
-          `/react-redux-readable/${this.props.match.params.category}/${
-            this.props.match.params.id
-          }`
-        )
-      );
+    if (this.inputValidated()) {
+      serverPostEdit({
+        id: this.props.match.params.id,
+        title: this.state.title,
+        body: this.state.body
+      })
+        .then(res => this.props.editPost(res))
+        .then(() => this.navigateToPost())
+        .catch(err => console.log(err));
+    }
   };
 
-  handleCancel = () =>
+  inputValidated = () => this.titleValidated() && this.bodyValidated();
+
+  titleValidated = () =>
+    this.state.title.trim() !== ''
+      ? true
+      : alert('Title cannot be blank.') || false;
+
+  bodyValidated = () =>
+    this.state.body.trim() !== ''
+      ? true
+      : alert('Body cannot be blank.') || false;
+
+  handleCancel = () => this.navigateToPost();
+
+  navigateToPost = () =>
     this.props.history.push(
-      `/react-redux-readable/${this.props.match.category}/${
+      `/react-redux-readable/${this.props.match.params.category}/${
         this.props.match.params.id
       }`
     );

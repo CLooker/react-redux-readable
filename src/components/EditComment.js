@@ -48,18 +48,26 @@ class EditComment extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    serverEditComment({
-      id: this.props.match.params.commentId,
-      body: this.state.body
-    })
-      .then(res => this.props.editComment(res))
-      .then(() =>
-        this.navigateToParentPost(
-          this.state.parentCategory,
-          this.props.match.params.id
-        )
-      );
+
+    if (this.inputValidated()) {
+      serverEditComment({
+        id: this.props.match.params.commentId,
+        body: this.state.body
+      })
+        .then(res => this.props.editComment(res))
+        .then(() =>
+          this.navigateToParentPost(
+            this.state.parentCategory,
+            this.props.match.params.id
+          )
+        );
+    }
   };
+
+  inputValidated = () =>
+    this.state.body.trim() !== ''
+      ? true
+      : alert('Body cannot be blank.') || false;
 
   navigateToParentPost = (category, id) =>
     this.props.history.push(`/react-redux-readable/${category}/${id}`);
