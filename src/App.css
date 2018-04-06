@@ -119,6 +119,7 @@ div.comments {
 }
 
 .no-match {
+  margin-top: 80px;
   display: flex;
   justify-content: center;
 }
@@ -387,4 +388,8 @@ div.post {
 
 .loading * {
   margin: 0 2px;
+}
+
+.hidden {
+  display: none;
 }

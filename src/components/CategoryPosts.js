@@ -10,6 +10,7 @@ import {
 import SortPosts from './SortPosts';
 import PostsList from './PostsList';
 import Loading from './Loading';
+import NoMatch from './NoMatch';
 import voteScoresDiff from '../utils/voteScoresDiff.js';
 import fetchLocalPosts from '../utils/fetchLocalPosts.js';
 import sortByTimeStamp from '../utils/sortByTimeStamp.js';
@@ -23,7 +24,11 @@ class CategoryPosts extends Component {
   state = {
     category: null,
     postsToRender: [],
-    order: null
+    order: null,
+    validateCategory: () =>
+      this.props.categories.some(
+        cat => cat === this.props.match.params.category
+      )
   };
 
   componentDidMount() {
@@ -45,7 +50,7 @@ class CategoryPosts extends Component {
       .then(res => this.props.syncLocalPosts(res) && res)
       .then(res =>
         this.setState({
-          category,
+          category: this.capitalizeTitle(this.props.match.params.category),
           postsToRender: [...res]
         })
       )
@@ -88,17 +93,30 @@ class CategoryPosts extends Component {
   capitalizeTitle = title =>
     title.split('').map((l, i) => (i === 0 ? l.toUpperCase() : l));
 
+  localCategoryMatchesProps = () =>
+    this.state.category === this.props.match.params.category;
+
+  localCategoryIsValid = () => {
+    const x = this.props.categories.some(
+      cat => cat === this.props.match.params.category
+    );
+    console.log(this.state.category);
+    console.log(this.props.categories);
+    console.log(x);
+    return x;
+  };
+
+  categoryHasPosts = () => this.state.postsToRender.length > 0;
+
+  categoryHasMultiplePosts = () => this.state.postsToRender.length > 1;
+
   render() {
     return this.props.herokuLoaded ? (
-      this.state.category === this.props.match.params.category && (
+      this.state.validateCategory() ? (
         <div className="category-posts">
           <div className="category-title-and-sort-container">
-            {this.state.postsToRender.length > 0 && (
-              <h1 className="category-title">
-                {this.capitalizeTitle(this.props.match.params.category)}
-              </h1>
-            )}
-            {this.state.postsToRender.length > 1 && (
+            <h1 className="category-title">{this.state.category}</h1>
+            {this.categoryHasMultiplePosts() && (
               <div className="sort-posts">
                 <SortPosts
                   sortByTimeStamp={this.sortByTimeStamp}
@@ -109,14 +127,18 @@ class CategoryPosts extends Component {
             )}
           </div>
 
-          <PostsList
-            postsToRender={this.state.postsToRender}
-            serverDeletePost={this.serverDeletePost}
-            serverUpvotePost={this.serverUpvotePost}
-            serverDownvotePost={this.serverDownvotePost}
-            {...this.props}
-          />
+          {this.categoryHasPosts() && (
+            <PostsList
+              postsToRender={this.state.postsToRender}
+              serverDeletePost={this.serverDeletePost}
+              serverUpvotePost={this.serverUpvotePost}
+              serverDownvotePost={this.serverDownvotePost}
+              {...this.props}
+            />
+          )}
         </div>
+      ) : (
+        <NoMatch location={this.props.location} />
       )
     ) : (
       <Loading />
@@ -128,7 +150,8 @@ function mapStateToProps(state) {
   return {
     posts: Object.keys(state.posts.postsById).map(
       key => state.posts.postsById[key]
-    )
+    ),
+    categories: state.posts.categories
   };
 }
 

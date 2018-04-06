@@ -9,6 +9,7 @@ import { syncLocalPost, editPost } from '../actions';
 
 class EditPost extends Component {
   state = {
+    postExists: '',
     title: '',
     body: '',
     voteScore: '',
@@ -21,7 +22,7 @@ class EditPost extends Component {
 
   componentDidMount() {
     fetchLocalPost(this.props.match.params.id)
-      .then(res => this.props.syncLocalPost(res) && res)
+      .then(res => console.log(res) || (this.props.syncLocalPost(res) && res))
       .then(
         ({
           title,

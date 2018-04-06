@@ -12,6 +12,7 @@ import updateHerokuLoaded from '../utils/updateHerokuLoaded.js';
 
 class PostDetails extends Component {
 	state = {
+		postExists: '',
 		id: '',
 		title: '',
 		body: '',
@@ -54,9 +55,9 @@ class PostDetails extends Component {
 		fetchLocalPost(post)
 			.then(
 				res =>
-					Object.keys(res).length > 0
+					!res.error
 						? this.props.syncLocalPost(res) && res
-						: this.setState({ deleted: true })
+						: this.setState({ postExists: false })
 			)
 			.then(
 				({
@@ -71,6 +72,7 @@ class PostDetails extends Component {
 					commentCount
 				}) =>
 					this.setState({
+						postExists: true,
 						id,
 						title,
 						body,
@@ -87,24 +89,28 @@ class PostDetails extends Component {
 	};
 
 	render() {
-		const { deleted, comments } = this.state;
+		const { postExists, deleted, comments } = this.state;
 		return this.props.herokuLoaded ? (
-			deleted !== '' && (
-				<div className="post-details">
-					{!deleted ? (
-						<div>
-							<PostDetailsPost {...this.state} {...this.props} />
-							<Comments
-								fetchComments={this.fetchComments}
-								comments={comments}
-								parentId={this.props.match.params.id}
-								category={this.props.match.params.category}
-							/>
-						</div>
-					) : (
-						<NoMatch location={this.props.location} />
-					)}
-				</div>
+			postExists === true ? (
+				deleted !== '' && (
+					<div className="post-details">
+						{deleted !== true ? (
+							<div>
+								<PostDetailsPost {...this.state} {...this.props} />
+								<Comments
+									fetchComments={this.fetchComments}
+									comments={comments}
+									parentId={this.props.match.params.id}
+									category={this.props.match.params.category}
+								/>
+							</div>
+						) : (
+							<NoMatch location={this.props.location} />
+						)}
+					</div>
+				)
+			) : (
+				<NoMatch location={this.props.location} />
 			)
 		) : (
 			<Loading />

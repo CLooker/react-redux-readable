@@ -8,6 +8,7 @@ import PostDetails from './PostDetails';
 import EditPost from './EditPost';
 import CreateComment from './CreateComment';
 import EditComment from './EditComment';
+import NoMatch from './NoMatch';
 import Footer from './Footer';
 import '../App.css';
 
@@ -30,7 +31,7 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <div>
+        <div className="route-container">
           <Route path="" component={Nav} />
           <Switch>
             <Route
@@ -80,6 +81,7 @@ export default class App extends Component {
                 <EditComment {...this.componentProps(routeProps)} />
               )}
             />
+            <Route component={NoMatch} />
           </Switch>
           <Footer />
         </div>
