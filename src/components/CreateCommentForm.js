@@ -8,7 +8,7 @@ const CreateCommentForm = ({
   handleAuthorChange
 }) => (
   <div className="create-comment-form-container">
-    <form className="create-comment-form" onSubmit={handleSubmit}>
+    <form className="create-comment-form">
       <label>
         <p className="create-comment-body">
           <strong>Body</strong>
@@ -34,8 +34,15 @@ const CreateCommentForm = ({
       <div className="create-comment-submit-input-container">
         <input
           className="create-comment-submit-input"
-          type="submit"
+          type="button"
+          onClick={() => handleSubmit('submit')}
           value="Submit"
+        />
+        <input
+          className="create-comment-submit-input"
+          type="button"
+          onClick={() => handleSubmit('cancel')}
+          value="Cancel"
         />
       </div>
     </form>

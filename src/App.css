@@ -178,6 +178,7 @@ div.post {
   border: 1px solid grey;
   padding: 20px;
   margin-top: 10px;
+  width: 594px;
 }
 
 .post-buttons button {
@@ -272,6 +273,10 @@ div.post {
   flex-direction: column;
 }
 
+.create-comment-form-container {
+  margin-bottom: 20px;
+}
+
 .create-comment-submit-input-container {
   display: flex;
   justify-content: center;
@@ -306,9 +311,16 @@ select {
   font-weight: normal;
 }
 
-.create-comment-submit-input {
+.create-comment-submit-input,
+.create-comment-submit-input-container button {
   height: 30px;
   width: 70px;
+}
+
+.create-comment-submit-input-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .create-comment-author-input {

@@ -17,6 +17,7 @@ import sortByVoteScore from '../utils/sortByVoteScore.js';
 import serverUpvotePost from '../utils/serverUpvotePost.js';
 import serverDownvotePost from '../utils/serverDownvotePost.js';
 import serverDeletePost from '../utils/serverDeletePost.js';
+import updateHerokuLoaded from '../utils/updateHerokuLoaded.js';
 
 class CategoryPosts extends Component {
   state = {
@@ -48,7 +49,12 @@ class CategoryPosts extends Component {
           postsToRender: [...res]
         })
       )
-      .then(() => !this.props.herokuLoaded && this.props.updateHerokuStatus())
+      .then(() =>
+        updateHerokuLoaded(
+          this.props.herokuLoaded,
+          this.props.updateHerokuLoaded
+        )
+      )
       .catch(err => console.log(err));
 
   serverUpvotePost = id =>

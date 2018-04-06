@@ -18,12 +18,12 @@ export default class App extends Component {
     herokuLoaded: false
   };
 
-  updateHerokuStatus = () =>
+  updateHerokuLoaded = () =>
     !this.state.herokuLoaded && this.setState({ herokuLoaded: true });
 
   componentProps = routeProps => ({
     herokuLoaded: this.state.herokuLoaded,
-    updateHerokuStatus: this.updateHerokuStatus,
+    updateHerokuLoaded: this.updateHerokuLoaded,
     ...routeProps
   });
 

@@ -4,6 +4,7 @@ import EditPostInfo from './EditPostInfo';
 import Loading from './Loading';
 import fetchLocalPost from '../utils/fetchLocalPost.js';
 import serverPostEdit from '../utils/serverPostEdit.js';
+import updateHerokuLoaded from '../utils/updateHerokuLoaded.js';
 import { syncLocalPost, editPost } from '../actions';
 
 class EditPost extends Component {
@@ -43,7 +44,12 @@ class EditPost extends Component {
             deleted
           })
       )
-      .then(() => !this.props.herokuLoaded && this.props.updateHerokuStatus())
+      .then(() =>
+        updateHerokuLoaded(
+          this.props.herokuLoaded,
+          this.props.updateHerokuLoaded
+        )
+      )
       .catch(err => console.log(err));
   }
 

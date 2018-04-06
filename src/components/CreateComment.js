@@ -6,6 +6,7 @@ import Loading from './Loading';
 import { addComment } from '../actions';
 import fetchLocalPost from '../utils/fetchLocalPost.js';
 import serverCreateComment from '../utils/serverCreateComment.js';
+import updateHerokuLoaded from '../utils/updateHerokuLoaded.js';
 
 class CreateComment extends Component {
   state = {
@@ -31,7 +32,12 @@ class CreateComment extends Component {
           parentCommentCount: commentCount
         })
       )
-      .then(() => !this.props.herokuLoaded && this.props.updateHerokuStatus())
+      .then(() =>
+        updateHerokuLoaded(
+          this.props.herokuLoaded,
+          this.props.updateHerokuLoaded
+        )
+      )
       .catch(err => console.log(err));
   }
 
@@ -39,21 +45,24 @@ class CreateComment extends Component {
 
   handleAuthorChange = e => this.setState({ author: e.target.value });
 
-  handleSubmit = e => {
-    e.preventDefault();
-    serverCreateComment({
-      body: this.state.body,
-      author: this.state.author,
-      parentId: this.props.match.params.id
-    }).then(() =>
-      this.navigateToNewPost(
-        this.props.match.params.category,
-        this.props.match.params.id
-      )
-    );
-  };
+  handleSubmit = type =>
+    type === 'submit'
+      ? serverCreateComment({
+          body: this.state.body,
+          author: this.state.author,
+          parentId: this.props.match.params.id
+        }).then(() =>
+          this.navigateToPost(
+            this.props.match.params.category,
+            this.props.match.params.id
+          )
+        )
+      : this.navigateToPost(
+          this.props.match.params.category,
+          this.props.match.params.id
+        );
 
-  navigateToNewPost = (category, id) =>
+  navigateToPost = (category, id) =>
     this.props.history.push(`/react-redux-readable/${category}/${id}`);
 
   render() {

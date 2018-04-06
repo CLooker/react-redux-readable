@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import fetchComment from '../utils/fetchComment.js';
 import fetchLocalPost from '../utils/fetchLocalPost.js';
 import serverEditComment from '../utils/serverEditComment.js';
+import updateHerokuLoaded from '../utils/updateHerokuLoaded.js';
 import EditCommentPost from './EditCommentPost';
 import EditCommentForm from './EditCommentForm';
 import Loading from './Loading';
@@ -34,7 +35,12 @@ class EditComment extends Component {
           })
         )
       )
-      .then(() => !this.props.herokuLoaded && this.props.updateHerokuStatus())
+      .then(() =>
+        updateHerokuLoaded(
+          this.props.herokuLoaded,
+          this.props.updateHerokuLoaded
+        )
+      )
       .catch(err => console.log(err));
   }
 

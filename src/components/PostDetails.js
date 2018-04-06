@@ -8,6 +8,7 @@ import NoMatch from './NoMatch';
 import voteScoresDiff from '../utils/voteScoresDiff.js';
 import fetchComments from '../utils/fetchComments.js';
 import fetchLocalPost from '../utils/fetchLocalPost.js';
+import updateHerokuLoaded from '../utils/updateHerokuLoaded.js';
 
 class PostDetails extends Component {
 	state = {
@@ -41,7 +42,12 @@ class PostDetails extends Component {
 					comments: [...res]
 				})
 			)
-			.then(() => !this.props.herokuLoaded && this.props.updateHerokuStatus())
+			.then(() =>
+				updateHerokuLoaded(
+					this.props.herokuLoaded,
+					this.props.updateHerokuLoaded
+				)
+			)
 			.catch(err => err);
 
 	fetchPost = post => {
@@ -83,21 +89,23 @@ class PostDetails extends Component {
 	render() {
 		const { deleted, comments } = this.state;
 		return this.props.herokuLoaded ? (
-			<div className="post-details">
-				{!deleted ? (
-					<div>
-						<PostDetailsPost {...this.state} {...this.props} />
-						<Comments
-							fetchComments={this.fetchComments}
-							comments={comments}
-							parentId={this.props.match.params.id}
-							category={this.props.match.params.category}
-						/>
-					</div>
-				) : (
-					<NoMatch location={this.props.location} />
-				)}
-			</div>
+			deleted !== '' && (
+				<div className="post-details">
+					{!deleted ? (
+						<div>
+							<PostDetailsPost {...this.state} {...this.props} />
+							<Comments
+								fetchComments={this.fetchComments}
+								comments={comments}
+								parentId={this.props.match.params.id}
+								category={this.props.match.params.category}
+							/>
+						</div>
+					) : (
+						<NoMatch location={this.props.location} />
+					)}
+				</div>
+			)
 		) : (
 			<Loading />
 		);
