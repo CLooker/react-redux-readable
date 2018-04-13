@@ -35,7 +35,6 @@ class PostDetailsPost extends Component {
       author,
       timestamp
     } = this.props;
-    console.log('postDetailsPost deleted: ', this.props.deleted);
     return (
       <div>
         <div className="post-details-post-title">Post Details</div>

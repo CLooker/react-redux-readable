@@ -12,6 +12,8 @@ Type `yarn` or `npm install`.
 
 When that finishes, type `yarn start` or `npm start`. This should launch a new tab in a browser window.
 
+Either click the home button in the nav bar, or make sure you navigate to `http://localhost:3000/react-redux-readable/`.
+
 # Context
 
 This was the second project for the Udacity React Nanodegree program. It's basically a message board built with React and Redux.

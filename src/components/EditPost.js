@@ -22,7 +22,7 @@ class EditPost extends Component {
 
   componentDidMount() {
     fetchLocalPost(this.props.match.params.id)
-      .then(res => console.log(res) || (this.props.syncLocalPost(res) && res))
+      .then(res => this.props.syncLocalPost(res) && res)
       .then(
         ({
           title,
