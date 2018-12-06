@@ -39,7 +39,7 @@ export default class App extends Component {
             />
             <Route
               exact
-              path="/react-redux-readable/"
+              path={'/react-redux-readable/' || ''}
               render={routeProps => (
                 <Root {...this.componentProps(routeProps)} />
               )}
