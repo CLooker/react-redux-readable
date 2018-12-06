@@ -4,7 +4,7 @@ const Resume = () => (
   <a
     className="resume"
     title="Résumé"
-    href="https://docs.google.com/document/d/161S5NQXgqMKpjowmmNkyHYupuVWDJ3KneGsIMjDwpBQ/edit?usp=sharing"
+    href="https://docs.google.com/document/d/14Ghmep9aoV91R755AFMAyPtIO5Hfh_5p4aTDJG6vpug/edit?usp=sharing"
     target="_blank"
     rel="noopener noreferrer"
   >
