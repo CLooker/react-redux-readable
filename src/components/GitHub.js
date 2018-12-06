@@ -8,10 +8,7 @@ const GitHub = () => (
     target="_blank"
     rel="noopener noreferrer"
   >
-    <img
-      src="https://image.freepik.com/free-icon/github-logo-black-shape_318-52922.jpg"
-      alt="GitHub"
-    />
+    <img src={require('../assets/github_logo.jpg')} alt="GitHub" />
   </a>
 );
 

@@ -8,10 +8,7 @@ const LinkedIn = () => (
     target="_blank"
     rel="noopener noreferrer"
   >
-    <img
-      src="https://media.cylex.com.ve/companies/1116/4931/logo/logo.jpg"
-      alt="LinkedIn"
-    />
+    <img src={require('../assets/linkedin_logo.png')} alt="LinkedIn" />
   </a>
 );
 

@@ -8,10 +8,7 @@ const Portfolio = () => (
     target="_blank"
     rel="noopener noreferrer"
   >
-    <img
-      src="https://image.freepik.com/free-icon/services-portfolio_318-32173.jpg"
-      alt="Portfolio"
-    />
+    <img src={require('../assets/portfolio_logo.jpg')} alt="Portfolio" />
   </a>
 );
 
