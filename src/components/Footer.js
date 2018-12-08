@@ -21,25 +21,26 @@ const footerItems = {
 };
 
 const Footer = () => (
-  <div className='footer'>
+  <ul className='footer'>
     {Object.keys(footerItems).map(title => (
-      <a
-        key={title}
-        className={title.toLowerCase()}
-        title={title}
-        href={footerItems[title].href}
-        target='_blank'
-        rel='noopener noreferrer'
-      >
-        <img
-          alt={title}
-          src={require(`../assets/${title.toLowerCase()}_logo.${
-            footerItems[title].imgExtension
-          }`)}
-        />
-      </a>
+      <li key={title}>
+        <a
+          className={title.toLowerCase()}
+          title={title}
+          href={footerItems[title].href}
+          target='_blank'
+          rel='noopener noreferrer'
+        >
+          <img
+            alt={title}
+            src={require(`../assets/${title.toLowerCase()}_logo.${
+              footerItems[title].imgExtension
+            }`)}
+          />
+        </a>
+      </li>
     ))}
-  </div>
+  </ul>
 );
 
 export default Footer;
