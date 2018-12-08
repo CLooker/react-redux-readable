@@ -18,6 +18,11 @@ class Nav extends Component {
     this.props.syncCategories(res);
   }
 
+  getTitle([...cat]) {
+    const capitalizedFirstLetter = cat[0].toUpperCase();
+    return [capitalizedFirstLetter, ...cat.slice(1)].join('');
+  }
+
   render() {
     return (
       <ul className='nav'>
@@ -27,7 +32,7 @@ class Nav extends Component {
               <img
                 src={require('../assets/home_logo.jpg')}
                 alt='home'
-                title='home'
+                title='Home'
               />
             </NavLink>
           </li>
@@ -41,7 +46,7 @@ class Nav extends Component {
                 <img
                   src={require(`../assets/${cat}_logo.png`)}
                   alt={`${cat} posts`}
-                  title={cat}
+                  title={this.getTitle(cat)}
                 />
               </NavLink>
             </li>
@@ -56,7 +61,7 @@ class Nav extends Component {
             <img
               src={require('../assets/new_logo.png')}
               alt='create post'
-              title='create post'
+              title='Create Post'
             />
           </NavLink>
         </li>
