@@ -1,6 +1,7 @@
 body {
   min-width: 580px;
   overflow: auto;
+  overflow-y: scroll;
   margin-bottom: 60px;
 }
 
