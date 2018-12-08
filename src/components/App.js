@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Redirect,
+  Route,
+  Switch
+} from 'react-router-dom';
 import Nav from './Nav';
 import Root from './Root';
 import CreatePost from './CreatePost';
@@ -29,52 +34,58 @@ export default class App extends Component {
   render() {
     return (
       <Router>
-        <div className="route-container">
-          <Route path="" component={Nav} />
+        <div className='route-container'>
+          <Route path='*' component={Nav} />
           <Switch>
             <Route
               exact
-              path="/react-redux-readable/create-post"
-              component={CreatePost}
+              path='/'
+              render={() => <Redirect to='/react-redux-readable' />}
             />
             <Route
               exact
-              path={'/react-redux-readable/' || ''}
+              path={'/react-redux-readable/'}
               render={routeProps => (
                 <Root {...this.componentProps(routeProps)} />
               )}
             />
             <Route
               exact
-              path="/react-redux-readable/:category"
+              path='/react-redux-readable/create-post'
+              component={CreatePost}
+            />
+
+            <Route
+              exact
+              path='/react-redux-readable/:category'
               render={routeProps => (
                 <CategoryPosts {...this.componentProps(routeProps)} />
               )}
             />
             <Route
               exact
-              path="/react-redux-readable/:category/:id"
+              path='/react-redux-readable/:category/:id'
               render={routeProps => (
                 <PostDetails {...this.componentProps(routeProps)} />
               )}
             />
             <Route
               exact
-              path="/react-redux-readable/:category/:id/edit"
+              path='/react-redux-readable/:category/:id/edit'
               render={routeProps => (
                 <EditPost {...this.componentProps(routeProps)} />
               )}
             />
             <Route
               exact
-              path="/react-redux-readable/:category/:id/create-comment"
+              path='/react-redux-readable/:category/:id/create-comment'
               render={routeProps => (
                 <CreateComment {...this.componentProps(routeProps)} />
               )}
             />
             <Route
               exact
-              path="/react-redux-readable/:category/:id/edit-comment/:commentId"
+              path='/react-redux-readable/:category/:id/edit-comment/:commentId'
               render={routeProps => (
                 <EditComment {...this.componentProps(routeProps)} />
               )}
