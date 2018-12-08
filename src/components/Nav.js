@@ -20,14 +20,14 @@ class Nav extends Component {
 
   render() {
     return (
-      <ul className="nav">
+      <ul className='nav'>
         {[
-          <li key="home">
-            <NavLink exact activeClassName="active" to="/react-redux-readable/">
+          <li key='home'>
+            <NavLink exact activeClassName='active' to='/react-redux-readable/'>
               <img
                 src={require('../assets/home_logo.jpg')}
-                alt="home"
-                title="home"
+                alt='home'
+                title='home'
               />
             </NavLink>
           </li>
@@ -35,8 +35,7 @@ class Nav extends Component {
           this.props.categories.map(cat => (
             <li key={cat}>
               <NavLink
-                exact
-                activeClassName="active"
+                activeClassName='active'
                 to={`/react-redux-readable/${cat}`}
               >
                 <img
@@ -48,16 +47,16 @@ class Nav extends Component {
             </li>
           ))
         )}
-        <li key="add-post">
+        <li key='add-post'>
           <NavLink
             exact
-            activeClassName="active"
+            activeClassName='active'
             to={'/react-redux-readable/create-post'}
           >
             <img
               src={require('../assets/new_logo.png')}
-              alt="create post"
-              title="create post"
+              alt='create post'
+              title='create post'
             />
           </NavLink>
         </li>
@@ -79,4 +78,7 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Nav);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Nav);
