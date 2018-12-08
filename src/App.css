@@ -14,6 +14,10 @@ ul {
   list-style-type: none;
 }
 
+button {
+  cursor: pointer;
+}
+
 .root,
 .category-posts,
 .post-details,
@@ -102,7 +106,8 @@ div.comments {
   align-items: center;
 }
 
-.nav li {
+.nav li,
+.footer li {
   padding: 0 5px;
 }
 
@@ -117,6 +122,10 @@ div.comments {
 .sort-posts {
   display: flex;
   align-items: center;
+}
+
+.sort-posts * {
+  margin: 0 1px;
 }
 
 .no-match {
@@ -363,10 +372,9 @@ div.post {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 10px 0;
-  height: 60px;
+  padding: 10px 0 0px;
   position: fixed;
-  bottom: 0;
+  bottom: -5px;
   left: 0;
   right: 0;
   border-top: solid 1px lightgrey;
