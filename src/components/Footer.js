@@ -11,7 +11,7 @@ const footerItems = {
   },
   Résumé: {
     href:
-      'https://docs.google.com/document/d/14Ghmep9aoV91R755AFMAyPtIO5Hfh_5p4aTDJG6vpug/edit?usp=sharing',
+      'https://docs.google.com/document/d/1W_Geb_gVSuYqUY-_EHUMIHeaOVHXk81sbG6FQcxBuD0/edit?usp=sharing',
     imgExtension: 'png'
   },
   Portfolio: {
